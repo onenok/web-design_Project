@@ -1,0 +1,54 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .sign-up-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+        height: 100%;
+    }
+
+    .sign-up-page h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+</style>
+<div class="sign-up-page usingFormDefaultStyle">
+    <div class="form-container">
+        <h1>註冊帳戶</h1>
+        <form id="sign-up-form" action="#" method="post">
+            <div class="form-input-group">
+                <label for="username" class="form-label">用戶名稱:</label>
+                <input type="text" id="username" name="username" placeholder="輸入用戶名稱" class="form-input"
+                    autocomplete="off" required><br><br>
+            </div>
+            <div class="form-input-group">
+                <label for="email" class="form-label">電子郵件:</label>
+                <input type="email" id="email" name="email" placeholder="輸入電子郵件" class="form-input"
+                    required><br><br>
+            </div>
+            <div class="form-input-group">
+                <label for="password" class="form-label">密碼:</label>
+                <div style="display: flex; align-items: center;">
+                    <input type="password" id="password" name="password-signup" placeholder="輸入密碼" class="form-input"
+                        autocomplete="off" required><br><br>
+                    <button type="button" id="togglePassword"
+                            aria-label="顯示/隱藏密碼">
+                        🙈
+                    </button>
+                </div>
+            </div>
+            <div class="form-input-group">
+                <label for="confirm-password" class="form-label">確認密碼:</label>
+                <input type="password" id="confirm-password" name="password-signup" placeholder="確認您的密碼"
+                    class="form-input" autocomplete="off" required><br><br>
+            </div>
+            <input type="submit" value="註冊" class="form-submit-button">
+        </form>
+    </div>
+</div>

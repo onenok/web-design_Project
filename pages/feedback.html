@@ -1,0 +1,45 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .feedback-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+        height: 100%;
+    }
+
+    .feedback-page h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+</style>
+<div class="feedback-page usingFormDefaultStyle">
+    <div class="form-container">
+        <h1>我們重視您的反饋</h1>
+        <form id="feedback-form" action="#" method="post">
+            <div class="form-input-group">
+                <label for="name" class="form-label">姓名:</label>
+                <input type="text" id="name" name="name" placeholder="輸入姓名" class="form-input"
+                    autocomplete="off" required><br><br>
+            </div>
+
+            <div class="form-input-group">
+                <label for="email" class="form-label">電子郵件:</label>
+                <input type="email" id="email" name="email" placeholder="輸入電子郵件" class="form-input"
+                    required><br><br>
+            </div>
+
+            <div class="form-input-group">
+                <label for="comments" class="form-label">意見反饋:</label>
+                <textarea id="comments" name="comments" rows="20" cols="50" placeholder="在此輸入您的意見..."
+                    class="form-textarea" required></textarea><br><br>
+            </div>
+
+            <input type="submit" value="提交反饋" class="form-submit-button">
+        </form>
+    </div>
+</div>
