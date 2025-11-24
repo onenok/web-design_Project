@@ -12,8 +12,8 @@ function switchFunction(element) {
 function fetchPage(page, contentDiv) {
     // default page: 'home'
     const pageName = page || 'home';
-    const pageFile = `/pages/${pageName}.html`; // pages/home.html
-    const JsFile = `/js/${pageName}.js`;     // js/home.js
+    const pageFile = `./pages/${pageName}.html`; // pages/home.html
+    const JsFile = `./js/${pageName}.js`;     // js/home.js
 
     fetch(pageFile)
         .then(response => {
