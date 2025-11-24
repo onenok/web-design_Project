@@ -35,6 +35,34 @@ function fetchPage(page, contentDiv) {
             contentDiv.innerHTML = '<p tabindex="-1">failed to load page, please try again later。</p>';
             console.error(error);
         });
+    // load associated JS file if exists
+    const allExistingScripts = document.querySelectorAll('script[data-page-script]');
+    allExistingScripts.forEach(script => {
+        if (script.dataset.name === pageName) {
+            // already loaded
+            return;
+        } else if (script.dataset.name) {
+            // remove previous page script
+            script.remove();
+        }
+    });
+    fetch(JsFile)
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('no associated JS file');
+        })
+        .then(jsCode => {
+            // execute the JS code
+            const script = document.createElement('script');
+            script.textContent = jsCode;
+            script.setAttribute('data-name', pageName);
+            document.body.appendChild(script);
+        })
+        .catch(error => {
+            // pass
+        });
 }
 
 // handle page load URL (support direct access to #{pageName})

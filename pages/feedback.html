@@ -19,23 +19,36 @@
 </style>
 <div class="feedback-page usingFormDefaultStyle">
     <div class="form-container">
-        <h1>我們重視您的反饋</h1>
+        <h1>意見反饋表</h1>
+        <p>您的意見對我們很重要，幫助我們改進服務。</p>
         <form id="feedback-form" action="#" method="post">
             <div class="form-input-group">
                 <label for="name" class="form-label">姓名:</label>
-                <input type="text" id="name" name="name" placeholder="輸入姓名" class="form-input"
+                <input type="text" id="name" name="name" placeholder="輸入您的姓名" class="form-input"
                     autocomplete="off" required><br><br>
             </div>
 
             <div class="form-input-group">
                 <label for="email" class="form-label">電子郵件:</label>
-                <input type="email" id="email" name="email" placeholder="輸入電子郵件" class="form-input"
+                <input type="email" id="email" name="email" placeholder="輸入您的電郵" class="form-input"
                     required><br><br>
+            </div>
+            
+            <div class="form-input-group">
+                <label for="service" class="form-label">服務類別:</label>
+                <select id="service" name="service" class="form-input" required>
+                    <option value="">請選擇服務類別</option>
+                    <option value="maintenance">汽車維修</option>
+                    <option value="washing">洗車服務</option>
+                    <option value="parts">配件銷售</option>
+                    <option value="inspection">汽車検測</option>
+                    <option value="other">其他</option>
+                </select><br><br>
             </div>
 
             <div class="form-input-group">
                 <label for="comments" class="form-label">意見反饋:</label>
-                <textarea id="comments" name="comments" rows="20" cols="50" placeholder="在此輸入您的意見..."
+                <textarea id="comments" name="comments" rows="15" cols="50" placeholder="請在此輸入您的寶貴意見..."
                     class="form-textarea" required></textarea><br><br>
             </div>
 
