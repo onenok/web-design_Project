@@ -19,7 +19,7 @@ html {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #333333;
+    background-color: #CCCCCC;
 }
 
 ::-webkit-scrollbar {
@@ -135,12 +135,10 @@ nav.top-bar a {
     display: grid;
     grid-template-rows: 1fr 70px;
     gap: 0px;
-    background-color: var(--background-color);
     color: var(--text-color);
 }
 
 .main-content {
-    background-color: rgba(255, 255, 255, 0.5);
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
