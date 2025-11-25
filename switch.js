@@ -25,7 +25,7 @@ function fetchPage(page, contentDiv) {
         .then(data => {
             contentDiv.innerHTML = data;
             // update URL，add #pageName
-            newUrl = location.pathname.replace(`/${pageFile}`,'') + `#${pageName}`;
+            newUrl = location.pathname + `#${pageName}`;
             history.pushState({ page: pageName }, '', newUrl);
             // update title
             document.title = `C.C.S. - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
