@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JustAWebSite</title>
+    <title>C.C.S.</title>
+    <!-- Base URL for relative paths - works on both local and GitHub Pages -->
+    <script>
+        // Detect the correct base path for both local development and GitHub Pages
+        const currentPath = window.location.pathname;
+        let basePath = '/';
+        
+        // If running on GitHub Pages, base path should be /web-design_Project/
+        if (currentPath.includes('/web-design_Project/')) {
+            basePath = '/web-design_Project/';
+        }
+        
+        // Create base element
+        const base = document.createElement('base');
+        base.href = basePath;
+        document.head.insertBefore(base, document.head.firstChild);
+    </script>
     <link rel="stylesheet" type="text/css" href="./default_style.css">
     <link rel="stylesheet" type="text/css" href="./form_default.css" data-scope=".usingFormDefaultStyle">
     <script src="./switch.js" defer></script>
@@ -16,7 +32,7 @@
         <!--nav bar-->
         <nav class="top-bar">
             <a href="/" class="nav-logo">
-                <span>CCS</span>
+                <span>C.C.S.</span>
             </a>
             <div class="nav-button">
                 <div>
@@ -50,7 +66,7 @@
                 <p>Loading...</p>
             </div>
             <footer class="footer">
-                <p>&copy; 2025 車輛綜合服務有限公司 (CCS Ltd.) 版權所有。</p>
+                <p>&copy; 2025 Car Comprehensive Services Ltd. (C.C.S. Ltd.) all rights reserved。</p>
                 <ul class="footer-links">
                     <li><a href="#privacy">隱私政策</a></li>
                     <li><a href="#terms">服務條款</a></li>
