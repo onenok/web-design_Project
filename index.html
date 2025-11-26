@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,12 @@
         // Detect the correct base path for both local development and GitHub Pages
         const currentPath = window.location.pathname;
         let basePath = '/';
-        
+
         // If running on GitHub Pages, base path should be /web-design_Project/
         if (currentPath.includes('/web-design_Project/')) {
             basePath = '/web-design_Project/';
         }
-        
+
         // Create base element
         const base = document.createElement('base');
         base.href = basePath;
@@ -28,6 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <script src="./particlebg.js" defer></script>
 </head>
+
 <body>
     <div class="major-container">
         <!--nav bar-->
@@ -40,7 +42,15 @@
                     <a href="#home">首頁</a>
                 </div>
                 <div>
-                    <a href="#services">服務</a>
+                    <div class="dropdown">
+                        <a href="#services" class="dropbtn">服務</a>
+                        <div class="dropdown-content">
+                            <a href="#vehicle-inspection">車輛檢測</a>
+                            <a href="#auto-repair">汽車維修</a>
+                            <a href="#car-wash">洗車服務</a>
+                            <a href="#parts-sales">配件銷售</a>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <a href="#about">關於我們</a>
@@ -69,6 +79,7 @@
             <footer class="footer">
                 <p>&copy; 2025 Car Comprehensive Services Ltd. (C.C.S. Ltd.) all rights reserved。</p>
                 <ul class="footer-links">
+                    <li><a href="#sitemap">網站地圖</a></li>
                     <li><a href="#privacy">隱私政策</a></li>
                     <li><a href="#terms">服務條款</a></li>
                 </ul>
@@ -76,4 +87,5 @@
         </div>
     </div>
 </body>
+
 </html>

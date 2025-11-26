@@ -1,5 +1,24 @@
 # 代辦及應注意事項
 
+```
+CIS222 Web Design and Development
+Group Project 40%
+Introduction
+You are employed to work for a company to create website for both customer and staff use. You have to design the layout of the webpages with the following functions:
+•	Company background, vision, general information
+•	Login function for both staff and customer
+•	Membership registration page
+The member registration page should only contain the form elements for user to key in, the submit button of the form should be active and you should use another html page to get what user input and show them on another html page. NO NEED to store any information in server or file.
+•	Products list / Services list
+This page should show products / services that the company provide, buy button should be included and the button should redirect the product information that the customer bought to another html page and show them. NO NEED to work out the real buy function in the website.
+•	Contact Us
+o	General inquiry form
+o	Comment
+o	Complaint
+•	Site Map
+•	Other relevant Webpages
+The website should contain at least 15 webpages (HTML file)
+```
 > 檔案位置：`TODO_and_NOTES.md`（專案根目錄）
 
 ---

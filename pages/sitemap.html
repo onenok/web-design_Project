@@ -1,0 +1,94 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .sitemap-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .sitemap-page h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .sitemap-page h2 {
+        color: #555;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .sitemap-page ul {
+        margin-left: 20px;
+        line-height: 1.8;
+    }
+    
+    .sitemap-page li {
+        margin-bottom: 8px;
+    }
+    
+    .sitemap-page a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+    
+    .sitemap-page a:hover {
+        text-decoration: underline;
+    }
+    
+    .sitemap-section {
+        margin-bottom: 25px;
+    }
+</style>
+<div class="sitemap-page">
+    <h1>網站地圖</h1>
+    <p>本網站的完整結構和導覽指南。</p>
+    
+    <div class="sitemap-section">
+        <h2>主導覽</h2>
+        <ul>
+            <li><a href="#home">首頁</a></li>
+            <li><a href="#about">關於我們</a></li>
+            <li><a href="#contact">聯絡我們</a></li>
+            <li><a href="#feedback">意見反饋</a></li>
+        </ul>
+    </div>
+    
+    <div class="sitemap-section">
+        <h2>服務</h2>
+        <ul>
+            <li><a href="#services">服務總覽</a></li>
+            <ul>
+                <li><a href="#vehicle-inspection">車輛檢測</a></li>
+                <li><a href="#auto-repair">汽車維修</a></li>
+                <li><a href="#car-wash">洗車服務</a></li>
+                <li><a href="#parts-sales">配件銷售</a></li>
+            </ul>
+        </ul>
+    </div>
+    
+    <div class="sitemap-section">
+        <h2>會員服務</h2>
+        <ul>
+            <li><a href="#sign_up">會員註冊</a></li>
+            <li><a href="#sign_in">會員登入</a></li>
+        </ul>
+    </div>
+    
+    <div class="sitemap-section">
+        <h2>法律與隱私</h2>
+        <ul>
+            <li><a href="#privacy">隱私政策</a></li>
+            <li><a href="#terms">服務條款</a></li>
+        </ul>
+    </div>
+    
+    <div class="sitemap-section">
+        <h2>其他</h2>
+        <ul>
+            <li><a href="#sitemap">網站地圖</a></li>
+        </ul>
+    </div>
+</div>
