@@ -1,0 +1,43 @@
+{
+  "car-inspection": {
+    "title": "車輛檢測預約與線上報價",
+    "fields": [
+      { "label": "姓名", "type": "text", "name": "name", "required": true },
+      { "label": "聯絡電話", "type": "tel", "name": "phone", "required": true },
+      { "label": "電子郵件", "type": "email", "name": "email", "required": true },
+      { "label": "檢測項目", "type": "select", "name": "inspection_type", "options": ["全面檢測", "故障診斷", "安全檢查", "排放檢測"], "required": true },
+      { "label": "預約日期", "type": "date", "name": "date", "required": true },
+      { "label": "備註", "type": "textarea", "name": "note" }
+    ]
+  },
+  "car-repair": {
+    "title": "汽車維修預約與線上報價",
+    "fields": [
+      { "label": "姓名", "type": "text", "name": "name", "required": true },
+      { "label": "聯絡電話", "type": "tel", "name": "phone", "required": true },
+      { "label": "維修項目", "type": "select", "name": "repair_type", "options": ["定期保養", "大小修理", "引擎檢修", "懸掛系統維修", "煞車系統維修"], "required": true },
+      { "label": "預約日期", "type": "date", "name": "date", "required": true },
+      { "label": "備註", "type": "textarea", "name": "note" }
+    ]
+  },
+  "car-wash": {
+    "title": "汽車美容與洗車預約",
+    "fields": [
+      { "label": "姓名", "type": "text", "name": "name", "required": true },
+      { "label": "聯絡電話", "type": "tel", "name": "phone", "required": true },
+      { "label": "服務項目", "type": "select", "name": "wash_type", "options": ["基本洗車", "深層清潔", "打蠟護理", "內裝清潔"], "required": true },
+      { "label": "預約日期", "type": "date", "name": "date", "required": true },
+      { "label": "備註", "type": "textarea", "name": "note" }
+    ]
+  },
+  "part-sales": {
+    "title": "汽車零件購買與訂購",
+    "fields": [
+      { "label": "姓名", "type": "text", "name": "name", "required": true },
+      { "label": "聯絡電話", "type": "tel", "name": "phone", "required": true },
+      { "label": "零件名稱", "type": "text", "name": "part_name", "required": true },
+      { "label": "數量", "type": "number", "name": "quantity", "required": true, "min": 1 },
+      { "label": "備註", "type": "textarea", "name": "note" }
+    ]
+  }
+}

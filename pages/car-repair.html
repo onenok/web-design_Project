@@ -2,32 +2,32 @@
 <!--It will be add in to a <div> element-->
 <!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
 <style>
-    .auto-repair-page {
+    .car-repair-page {
         display: flex;
         flex-direction: column;
         padding: 20px;
         height: 100%;
     }
     
-    .auto-repair-page h1 {
+    .car-repair-page h1 {
         color: #333;
         margin-bottom: 20px;
     }
     
-    .auto-repair-page h2 {
+    .car-repair-page h2 {
         color: #555;
         margin-top: 20px;
     }
     
-    .auto-repair-page ul {
+    .car-repair-page ul {
         margin-left: 20px;
     }
     
-    .auto-repair-page li {
+    .car-repair-page li {
         margin-bottom: 10px;
     }
 </style>
-<div class="auto-repair-page">
+<div class="car-repair-page">
     <h1>汽車維修服務</h1>
     <p>我們提供專業的汽車維修服務，確保您的車輛運行順暢。</p>
     
@@ -53,7 +53,10 @@
     </section>
     
     <section>
-        <h2>聯絡我們</h2>
-        <p>如需維修服務，請 <a href="#contact">聯絡我們</a> 預約時間。</p>
+        <button onclick="location.href='#appointment?service=car-repair'">預約維修服務</button>
+    </section>
+
+    <section>
+        <p>如有疑問，請轉至<a href="#contact">聯絡我們</a>頁面。</p>
     </section>
 </div>

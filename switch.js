@@ -11,7 +11,8 @@ function switchFunction(element) {
 // load page content function
 function fetchPage(page, contentDiv) {
     // default page: 'home'
-    const pageName = page || 'home';
+    const tempName = page || 'home';
+    const pageName = tempName.includes('?') ? tempName.split('?')[0] : tempName;
     const pageFile = `pages/${pageName}.html`; // pages/home.html (relative to base)
     const JsFile = `js/${pageName}.js`;     // js/home.js (relative to base)
 
@@ -25,7 +26,7 @@ function fetchPage(page, contentDiv) {
         .then(data => {
             contentDiv.innerHTML = data;
             // update URL，add #pageName
-            newUrl = location.pathname + `#${pageName}`;
+            const newUrl = location.pathname + `#${tempName}`;
             history.pushState({ page: pageName }, '', newUrl);
             // update title
             document.title = `C.C.S. - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
@@ -33,7 +34,7 @@ function fetchPage(page, contentDiv) {
             contentDiv.focus();
         })
         .catch(error => {
-            contentDiv.innerHTML = '<p tabindex="-1">failed to load page, please try again later。</p>';
+            contentDiv.innerHTML = `<p tabindex="-1">failed to load page "${pageName}", please try again later。</p>`;
             console.error(error);
         });
     // load associated JS file if exists
@@ -57,8 +58,9 @@ function fetchPage(page, contentDiv) {
         .then(jsCode => {
             // execute the JS code
             const script = document.createElement('script');
-            script.textContent = jsCode;
+            script.src = JsFile;
             script.setAttribute('data-name', pageName);
+            script.setAttribute('data-page-script', 'true');
             document.body.appendChild(script);
         })
         .catch(error => {
@@ -67,13 +69,11 @@ function fetchPage(page, contentDiv) {
 }
 
 // handle page load URL (support direct access to #{pageName})
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.querySelector('.main-content');
-    // extract #pageName from URL
     const page = window.location.hash.replace('#', '') || 'home';
-
     fetchPage(page, contentDiv);
-};
+});
 
 // handle browser back/forward buttons
 window.onpopstate = function(event) {
