@@ -1,0 +1,29 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .show-from-value-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+</style>
+<div class="show-from-value-page">
+    <h1>顯示來自值的頁面</h1>
+    <p>這個頁面展示了如何根據傳遞的值來顯示內容。</p>
+    <section>
+        <h2>傳遞的值</h2>
+        <div id="value-display">這裡將顯示傳遞的值。</div>
+    </section>
+</div>
+<script>
+    const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
+    console.log(items);
+    document.getElementById("value-display").innerHTML = `<h3>您提交的項目有: ${items.toString()}</h3>`;
+
+    for (let item of items) {
+        const value = sessionStorage.getItem(item);
+        document.getElementById("value-display").innerHTML += `<p><strong>${item}:</strong> ${value}</p>`;
+    }
+</script>

@@ -21,7 +21,7 @@
     <div class="form-container">
         <h1>意見反饋表</h1>
         <p>您的意見對我們很重要，幫助我們改進服務。</p>
-        <form id="feedback-form" action="#" method="post">
+        <form id="feedback-form" action="#showFromValue" method="post" onsubmit="return doubleCheckAndSave(this)">
             <div class="form-input-group">
                 <label for="name" class="form-label">姓名:</label>
                 <input type="text" id="name" name="name" placeholder="輸入您的姓名" class="form-input"
@@ -56,3 +56,35 @@
         </form>
     </div>
 </div>
+<script>
+    function doubleCheckAndSave(form) {
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const service = form.service.value;
+        const comments = form.comments.value.trim();
+
+        if (!name || !email || !service || !comments) {
+            alert("請填寫所有必填欄位。");
+            return false;
+        }
+
+        if (!validator.isEmail(email)) {
+            alert("電子郵件地址無效\n請輸入有效的電子郵件地址。");
+            return false;
+        }
+
+        const confirmation = confirm(`請確認您的反饋內容：\n\n姓名: ${name}\n電子郵件: ${email}\n服務類別: ${service}\n意見反饋: ${comments}\n\n是否提交？`);
+        if (confirmation) {
+            alert("感謝您的反饋！");
+            sessionStorage.setItem('submittedItems', ['Name', 'Email', 'Service', 'Comments']);
+            sessionStorage.setItem('Name', name);
+            sessionStorage.setItem('Email', email);
+            sessionStorage.setItem('Service', service);
+            sessionStorage.setItem('Comments', comments);
+            // Here you can add code to actually save the feedback, e.g., send it to a server
+            return true; // Proceed with form submission
+        } else {
+            return false; // Cancel form submission
+        }
+    }
+</script>
