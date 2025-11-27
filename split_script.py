@@ -27,4 +27,7 @@ for filename in os.listdir("./pages"):
                         js_file.write(f"// Referenced external script: {src_match.group(1)}\n")
                     # 如果有內嵌內容
                     if content.strip():
+                        js_file.write("(function () {\n")
                         js_file.write(content.strip() + "\n\n")
+                        js_file.write("})();\n")
+            print(f"Extracted scripts to {js_filename}")

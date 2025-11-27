@@ -20,10 +20,10 @@
 <div class="appointment-page usingFormDefaultStyle">
     <div class="form-container">
         <h1 id="form-title">Service Booking And Online Quotation</h1>
-        <form id="appointment-form" action="#payment" method="get" class="usingFormDefaultStyle" onsubmit="return doubleCheckAndSave(this)">
+        <form id="appointment-form" action="#payment" method="get" class="usingFormDefaultStyle">
             <!-- Dyanimc Generated Fields -->
             <div id="form-fields"></div>
-            <button type="submit" class="form-submit-button">Submit and Proceed to Payment</button>
+            <input type="submit" class="form-submit-button" value="Submit and Proceed to Payment">
         </form>
     </div>
 </div>
@@ -61,17 +61,34 @@
                                 </select>`;
                     } else if (field.type === 'textarea') {
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                                <textarea class="form-textarea" id="${field.name}" name="${field.name}"></textarea>`;
+                                <textarea class="form-textarea" cols="${field.cols || ''}" rows="${field.rows || ''}" placeholder="${field.placeholder}" id="${field.name}" name="${field.name}"></textarea>`;
                     } else {
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                                <input type="${field.type}" class="form-input" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>`;
+                                <input type="${field.type}" placeholder="${field.placeholder}" class="form-input" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>`;
                     }
                     const div = document.createElement('div');
                     div.className = 'form-input-group';
                     div.innerHTML = html;
                     container.appendChild(div);
                 });
+                const telInput = document.getElementById('phone');
+                console.log(telInput);
+                if (telInput) {
+                    console.log('telInput found');
+                    telInput.addEventListener('input', () => {
+                        if (validator.isMobilePhone(telInput.value, 'zh-HK')) {
+                            telInput.setCustomValidity('');
+                        } else {
+                            telInput.setCustomValidity('Invalid phone number. Please enter a valid Hong Kong phone number.');
+                        }
+                        telInput.reportValidity();
+                    });
+                }
+                else {
+                    console.log('telInput not found', "", document.getElementById('form-fields').innerHTML);
+                }
             });
+        
     }
     function doubleCheckAndSave(form) {
         const formData = new FormData(form);
@@ -96,6 +113,8 @@
             return false;
         }
         alert("Thank you for your appointment! Proceeding to payment page.");
+        
+        sessionStorage.clear();
         const newEntries = entries.map(([key,value]) => [key.charAt(0).toUpperCase() + key.slice(1), value]);
         sessionStorage.setItem('submittedItems', newEntries.map(([key]) => key).toString());
         newEntries.forEach(([key, value]) => {
@@ -104,4 +123,10 @@
         
         return true; 
     }
+    const appointmentForm = document.getElementById('appointment-form');
+    appointmentForm.addEventListener('submit', (event) => {
+        if (!doubleCheckAndSave(appointmentForm)) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
 </script>

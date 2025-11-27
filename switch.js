@@ -39,24 +39,16 @@ function fetchPage(page, contentDiv) {
         });
     // load associated JS file if exists
     const allExistingScripts = document.querySelectorAll('script[data-page-script]');
-    allExistingScripts.forEach(script => {
-        if (script.dataset.name === pageName) {
-            // already loaded
-            return;
-        } else if (script.dataset.name) {
-            // remove previous page script
-            script.remove();
-        }
-    });
-    fetch(JsFile)
+    allExistingScripts.forEach(script => {script.remove();}); // remove previously added page scripts
+    fetch(JsFile) // check if JS file exists
         .then(response => {
             if (response.ok) {
                 return response.text();
             }
             throw new Error('no associated JS file');
         })
-        .then(jsCode => {
-            // execute the JS code
+        .then(() => {
+            // add the script to the document, even it was already added, cuz we need to run it again
             const script = document.createElement('script');
             script.src = JsFile;
             script.setAttribute('data-name', pageName);

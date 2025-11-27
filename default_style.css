@@ -155,7 +155,7 @@ nav.top-bar a {
     display: none;
     position: absolute;
     background-color: var(--nav-background-color);
-    min-width: 200px;
+    min-width: 250px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
@@ -239,7 +239,20 @@ footer {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
 }
-
+.main-content > :nth-child(2) button {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: block;
+    width: fit-content;
+    height: 50px;
+    font-size: 1.2em;
+    margin-top: 20px;
+    cursor: pointer;
+    align-self: center;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
 /* Target all elements that normally contain text */
 .main-content > :nth-child(2) :is(
     p, h1, h2, h3, h4, h5, h6,

@@ -19,36 +19,36 @@
 </style>
 <div class="feedback-page usingFormDefaultStyle">
     <div class="form-container">
-        <h1>意見反饋表</h1>
-        <p>您的意見對我們很重要，幫助我們改進服務。</p>
-        <form id="feedback-form" action="#showFromValue" method="post" onsubmit="return doubleCheckAndSave(this)">
+        <h1>Feedback Form</h1>
+        <p>Your feedback is important to us and helps us improve our services.</p>
+        <form id="feedback-form" action="#showFormValue" method="post">
             <div class="form-input-group">
-                <label for="name" class="form-label">姓名:</label>
-                <input type="text" id="name" name="name" placeholder="輸入您的姓名" class="form-input"
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" class="form-input"
                     autocomplete="off" required><br><br>
             </div>
 
             <div class="form-input-group">
-                <label for="email" class="form-label">電子郵件:</label>
-                <input type="email" id="email" name="email" placeholder="輸入您的電郵" class="form-input"
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" class="form-input"
                     required><br><br>
             </div>
             
             <div class="form-input-group">
-                <label for="service" class="form-label">服務類別：</label>
+                <label for="service" class="form-label">Service Category:</label>
                 <select id="service" name="service" class="form-input" required>
-                    <option value="">請選擇服務類別</option>
-                    <option value="maintenance">汽車維修</option>
-                    <option value="washing">洗車服務</option>
-                    <option value="parts">配件銷售</option>
-                    <option value="inspection">汽車檢測</option>
-                    <option value="other">其他</option>
+                    <option value="">Please select a service category</option>
+                    <option value="maintenance">Car Maintenance</option>
+                    <option value="washing">Car Wash</option>
+                    <option value="parts">Parts Sales</option>
+                    <option value="inspection">Car Inspection</option>
+                    <option value="other">Other</option>
                 </select><br><br>
             </div>
 
             <div class="form-input-group">
-                <label for="comments" class="form-label">意見反饋:</label>
-                <textarea id="comments" name="comments" rows="15" cols="50" placeholder="請在此輸入您的寶貴意見..."
+                <label for="comments" class="form-label">Feedback:</label>
+                <textarea id="comments" name="comments" rows="15" cols="50" placeholder="Please enter your valuable feedback here..."
                     class="form-textarea" required></textarea><br><br>
             </div>
 
@@ -64,20 +64,22 @@
         const comments = form.comments.value.trim();
 
         if (!name || !email || !service || !comments) {
-            alert("請填寫所有必填欄位。");
+            alert("Please fill in all required fields.");
             return false;
         }
 
         if (!validator.isEmail(email)) {
-            alert("電子郵件地址無效\n請輸入有效的電子郵件地址。");
+            alert("Invalid email address\nPlease enter a valid email address.");
             return false;
         }
 
-        const confirmation = confirm(`請確認您的反饋內容：\n\n姓名: ${name}\n電子郵件: ${email}\n服務類別: ${service}\n意見反饋: ${comments}\n\n是否提交？`);
+        const confirmation = confirm(`Please confirm your feedback:\n\nName: ${name}\nEmail: ${email}\nService Category: ${service}\nFeedback: ${comments}\n\nSubmit?`);
         if (!confirmation) {
             return false; // Cancel form submission
         }
-        alert("感謝您的反饋！");
+        alert("Thank you for your feedback!");
+        
+        sessionStorage.clear();
         sessionStorage.setItem('submittedItems', ['Name', 'Email', 'Service', 'Comments']);
         sessionStorage.setItem('Name', name);
         sessionStorage.setItem('Email', email);
@@ -86,4 +88,10 @@
         // Here you can add code to actually save the feedback, e.g., send it to a server
         return true; // Proceed with form submission
     }
+    const feedbackForm = document.getElementById('feedback-form');
+    feedbackForm.addEventListener('submit', (event) => {
+        if (!doubleCheckAndSave(feedbackForm)) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
 </script>

@@ -2,45 +2,115 @@
   "car-inspection": {
     "title": "Car Check Booking And Online Quotation",
     "fields": [
-      { "label": "Name", "type": "text", "name": "name", "required": true },
-      { "label": "Contact Phone", "type": "tel", "name": "phone", "required": true },
-      { "label": "Email", "type": "email", "name": "email", "required": true },
-      { "label": "Inspection Type", "type": "select", "name": "inspection_type", "options": ["Comprehensive Inspection", "Fault Diagnosis", "Safety Check", "Emission Test"], "required": true },
-      { "label": "Appointment Date", "type": "date", "name": "date", "required": true },
-      { "label": "Notes", "type": "textarea", "name": "note" }
+      { 
+        "label": "Name", "type": "text", "name": "name",
+        "required": true, "placeholder": "Enter your name" 
+      },
+      { 
+        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
+        "required": true, "placeholder": "e.g. +852 6789 1234" 
+      },
+      { 
+        "label": "Email", "type": "email", "name": "email", 
+        "required": true, "placeholder": "Enter your email" 
+      },
+      { 
+        "label": "Inspection Type", "type": "select", "name": "inspection_type",
+        "options": ["Comprehensive Inspection", "Fault Diagnosis", "Safety Check", "Emission Test"], "required": true 
+      },
+      { 
+        "label": "Appointment Date", "type": "date", "name": "date", "required": true },
+      { 
+        "label": "Notes", "type": "textarea", "name": "note",
+        "placeholder": "Describe any specific concerns or issues"
+      }
     ]
   },
   "car-repair": {
     "title": "Car Repair Booking And Online Quotation",
     "fields": [
-      { "label": "Name", "type": "text", "name": "name", "required": true },
-      { "label": "Contact Phone", "type": "tel", "name": "phone", "required": true },
-      { "label": "Email", "type": "email", "name": "email", "required": true },
-      { "label": "Repair Type", "type": "select", "name": "repair_type", "options": ["Regular Maintenance", "Major Repairs", "Engine Inspection", "Suspension System Repair", "Brake System Repair"], "required": true },
-      { "label": "Appointment Date", "type": "date", "name": "date", "required": true },
-      { "label": "Notes", "type": "textarea", "name": "note" }
+      { 
+        "label": "Name", "type": "text", "name": "name",
+        "required": true, "placeholder": "Enter your name"
+      },
+      { 
+        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
+        "required": true, "placeholder": "e.g. +852 6789 1234"
+      },
+      { 
+        "label": "Email", "type": "email", "name": "email",
+        "required": true, "placeholder": "Enter your email"
+      },
+      { 
+        "label": "Repair Type", "type": "select", "name": "repair_type",
+        "options": ["Regular Maintenance", "Major Repairs", "Engine Inspection", "Suspension System Repair", "Brake System Repair"], "required": true 
+      },
+      { 
+        "label": "Appointment Date", "type": "date", "name": "date",
+        "required": true 
+      },
+      { 
+        "label": "Notes", "type": "textarea", "name": "note",
+        "placeholder": "Describe the issues or services needed"
+      }
     ]
   },
   "car-wash": {
     "title": "Car Wash and Detailing Booking",
     "fields": [
-      { "label": "Name", "type": "text", "name": "name", "required": true },
-      { "label": "Contact Phone", "type": "tel", "name": "phone", "required": true },
-      { "label": "Email", "type": "email", "name": "email", "required": true },
-      { "label": "Service Item", "type": "select", "name": "wash_type", "options": ["Basic Car Wash", "Deep Cleaning", "Wax Care", "Interior Cleaning"], "required": true },
-      { "label": "Appointment Date", "type": "date", "name": "date", "required": true },
-      { "label": "Notes", "type": "textarea", "name": "note" }
+      { 
+        "label": "Name", "type": "text", "name": "name",
+        "required": true, "placeholder": "Enter your name" 
+      },
+      { 
+        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
+        "required": true, "placeholder": "e.g. +852 6789 1234" 
+      },
+      { 
+        "label": "Email", "type": "email", "name": "email",
+        "required": true, "placeholder": "Enter your email" 
+      },
+      { 
+        "label": "Service Item", "type": "select", "name": "wash_type",
+        "options": ["Basic Car Wash", "Deep Cleaning", "Wax Care", "Interior Cleaning"], "required": true 
+      },
+      { 
+        "label": "Appointment Date", "type": "date", "name": "date",
+        "required": true 
+      },
+      { 
+        "label": "Notes", "type": "textarea", "name": "note",
+        "placeholder": "Any special requests or instructions"
+      }
     ]
   },
-  "part-sales": {
+  "parts-sales": {
     "title": "Car Parts Purchase and Ordering",
     "fields": [
-      { "label": "Name", "type": "text", "name": "name", "required": true },
-      { "label": "Contact Phone", "type": "tel", "name": "phone", "required": true },
-      { "label": "Email", "type": "email", "name": "email", "required": true },
-      { "label": "Part Name(s)(split with commas)", "type": "text", "name": "part_names-list", "required": true },
-      { "label": "Quantity", "type": "number", "name": "quantity", "required": true, "min": 1 },
-      { "label": "Notes", "type": "textarea", "name": "note" }
+      { 
+        "label": "Name", "type": "text", "name": "name",
+        "required": true, "placeholder": "Enter your name"
+      },
+      { 
+        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
+        "required": true, "placeholder": "e.g. +852 6789 1234"
+      },
+      { 
+        "label": "Email", "type": "email", "name": "email",
+        "required": true, "placeholder": "Enter your email"
+      },
+      { 
+        "label": "Part Name(s)(split with commas)", "type": "text", "name": "part_names-list",
+        "required": true, "placeholder": "e.g. Brake Pads, Air Filter"
+      },
+      { 
+        "label": "Quantity", "type": "number", "name": "quantity",
+        "required": true, "min": 1, "placeholder": "Enter quantity needed"
+      },
+      { 
+        "label": "Notes", "type": "textarea", "name": "note",
+        "placeholder": "Specify any particular brand, model, or specifications"
+      }
     ]
   }
 }

@@ -1,5 +1,6 @@
 // Extracted scripts from feedback.html
 
+(function () {
 function doubleCheckAndSave(form) {
         const name = form.name.value.trim();
         const email = form.email.value.trim();
@@ -7,20 +8,22 @@ function doubleCheckAndSave(form) {
         const comments = form.comments.value.trim();
 
         if (!name || !email || !service || !comments) {
-            alert("請填寫所有必填欄位。");
+            alert("Please fill in all required fields.");
             return false;
         }
 
         if (!validator.isEmail(email)) {
-            alert("電子郵件地址無效\n請輸入有效的電子郵件地址。");
+            alert("Invalid email address\nPlease enter a valid email address.");
             return false;
         }
 
-        const confirmation = confirm(`請確認您的反饋內容：\n\n姓名: ${name}\n電子郵件: ${email}\n服務類別: ${service}\n意見反饋: ${comments}\n\n是否提交？`);
+        const confirmation = confirm(`Please confirm your feedback:\n\nName: ${name}\nEmail: ${email}\nService Category: ${service}\nFeedback: ${comments}\n\nSubmit?`);
         if (!confirmation) {
             return false; // Cancel form submission
         }
-        alert("感謝您的反饋！");
+        alert("Thank you for your feedback!");
+        
+        sessionStorage.clear();
         sessionStorage.setItem('submittedItems', ['Name', 'Email', 'Service', 'Comments']);
         sessionStorage.setItem('Name', name);
         sessionStorage.setItem('Email', email);
@@ -29,4 +32,11 @@ function doubleCheckAndSave(form) {
         // Here you can add code to actually save the feedback, e.g., send it to a server
         return true; // Proceed with form submission
     }
+    const feedbackForm = document.getElementById('feedback-form');
+    feedbackForm.addEventListener('submit', (event) => {
+        if (!doubleCheckAndSave(feedbackForm)) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
 
+})();
