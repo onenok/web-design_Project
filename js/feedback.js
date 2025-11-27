@@ -17,17 +17,16 @@ function doubleCheckAndSave(form) {
         }
 
         const confirmation = confirm(`請確認您的反饋內容：\n\n姓名: ${name}\n電子郵件: ${email}\n服務類別: ${service}\n意見反饋: ${comments}\n\n是否提交？`);
-        if (confirmation) {
-            alert("感謝您的反饋！");
-            sessionStorage.setItem('submittedItems', ['Name', 'Email', 'Service', 'Comments']);
-            sessionStorage.setItem('Name', name);
-            sessionStorage.setItem('Email', email);
-            sessionStorage.setItem('Service', service);
-            sessionStorage.setItem('Comments', comments);
-            // Here you can add code to actually save the feedback, e.g., send it to a server
-            return true; // Proceed with form submission
-        } else {
+        if (!confirmation) {
             return false; // Cancel form submission
         }
+        alert("感謝您的反饋！");
+        sessionStorage.setItem('submittedItems', ['Name', 'Email', 'Service', 'Comments']);
+        sessionStorage.setItem('Name', name);
+        sessionStorage.setItem('Email', email);
+        sessionStorage.setItem('Service', service);
+        sessionStorage.setItem('Comments', comments);
+        // Here you can add code to actually save the feedback, e.g., send it to a server
+        return true; // Proceed with form submission
     }
 

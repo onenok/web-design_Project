@@ -26,8 +26,8 @@ function fetchPage(page, contentDiv) {
         .then(data => {
             contentDiv.innerHTML = data;
             // update URL，add #pageName
-            const newUrl = location.pathname + `#${tempName}`;
-            history.pushState({ page: pageName }, '', newUrl);
+            //const newUrl = location.pathname + `#${tempName}`;
+            //history.pushState({ page: pageName }, '', newUrl);
             // update title
             document.title = `C.C.S. - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
             // set focus to content div for accessibility

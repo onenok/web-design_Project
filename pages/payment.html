@@ -2,25 +2,25 @@
 <!--It will be add in to a <div> element-->
 <!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
 <style>
-    .show-from-value-page {
+    .payment-page {
         display: flex;
         flex-direction: column;
         padding: 20px;
         height: 100%;
     }
 </style>
-<div class="show-from-value-page">
-    <h1>顯示來自值的頁面</h1>
-    <p>這個頁面展示了如何根據傳遞的值來顯示內容。</p>
+<div class="payment-page">
+    <h1>payment is not supported yet</h1>
+    <p>But you can see the submitted values below:</p>
     <section>
-        <h2>傳遞的值</h2>
-        <div id="value-display">這裡將顯示傳遞的值。</div>
+        <h2>Submitted Values</h2>
+        <div id="value-display">Here will display the submitted values.</div>
     </section>
 </div>
 <script>
     const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
     console.log(items);
-    document.getElementById("value-display").innerHTML = `<h3>您提交的項目有: ${items.toString()}</h3><br>`;
+    document.getElementById("value-display").innerHTML = `<h3>The items you submitted are: ${items.toString()}</h3><br>`;
 
     for (let item of items) {
         const value = sessionStorage.getItem(item);
