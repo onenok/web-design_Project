@@ -131,20 +131,11 @@ nav.top-bar a {
     position: relative;
     display: inline-block;
     width: 100%;
+    border: none !important;
 }
 
 .dropbtn {
-    color: var(--nav-text-color);
-    padding: 0.5rem 1rem;
-    font-size: 16px;
     border: none;
-    cursor: pointer;
-    background-color: transparent;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    display: block;
-    width: 100%;
-    text-align: left;
 }
 
 .dropbtn:hover {
