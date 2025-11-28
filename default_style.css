@@ -79,6 +79,8 @@ section h2 {font-size: 1.8em; margin-bottom: 8px;}
 }
 
 nav.top-bar {
+    position: sticky;
+    top: 0;
     display: flex;
     background-color: var(--nav-background-color);
     color: var(--nav-text-color);
@@ -150,7 +152,7 @@ nav.top-bar a {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
-    top: 100%;
+    top: 150%;
     left: 0;
     border: 1px solid var(--nav-text-color);
 }
