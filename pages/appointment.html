@@ -20,7 +20,7 @@
 <div class="appointment-page usingFormDefaultStyle">
     <div class="form-container">
         <h1 id="form-title">Service Booking And Online Quotation</h1>
-        <form id="appointment-form" action="#payment" method="get" class="usingFormDefaultStyle">
+        <form id="appointment-form" action="javascript:void(0)" method="get" class="usingFormDefaultStyle">
             <!-- Dyanimc Generated Fields -->
             <div id="form-fields"></div>
             <input type="submit" class="form-submit-button" value="Submit and Proceed to Payment">
@@ -120,13 +120,12 @@
         newEntries.forEach(([key, value]) => {
             sessionStorage.setItem(key, value);
         });
-        
-        return true; 
+        window.location.hash = "#payment";
+        return false; 
     }
     const appointmentForm = document.getElementById('appointment-form');
     appointmentForm.addEventListener('submit', (event) => {
-        if (!doubleCheckAndSave(appointmentForm)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
+        event.preventDefault(); // Prevent form submission if validation fails
+        doubleCheckAndSave(appointmentForm)
     });
 </script>

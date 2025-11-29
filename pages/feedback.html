@@ -21,7 +21,7 @@
     <div class="form-container">
         <h1>Feedback Form</h1>
         <p>Your feedback is important to us and helps us improve our services.</p>
-        <form id="feedback-form" action="#showFormValue" method="post">
+        <form id="feedback-form" action="javascript:void(0)" method="post">
             <div class="form-input-group">
                 <label for="name" class="form-label">Name:</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name" class="form-input"
@@ -86,12 +86,12 @@
         sessionStorage.setItem('Service', service);
         sessionStorage.setItem('Comments', comments);
         // Here you can add code to actually save the feedback, e.g., send it to a server
-        return true; // Proceed with form submission
+        window.location.hash = "#showFormValue";
+        return false; // Proceed with form submission
     }
     const feedbackForm = document.getElementById('feedback-form');
     feedbackForm.addEventListener('submit', (event) => {
-        if (!doubleCheckAndSave(feedbackForm)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
+        event.preventDefault();
+        doubleCheckAndSave(feedbackForm)
     });
 </script>

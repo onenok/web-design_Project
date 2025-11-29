@@ -23,6 +23,7 @@ function handlefunc(form) {
         } else {
             alert("Invalid username or password. Please try again.");
         }
+        return false;
     }
     const form = document.getElementById('sign-in-form');
     form.onsubmit = function(event) {

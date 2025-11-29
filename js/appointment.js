@@ -92,14 +92,13 @@ const hash = window.location.hash;
         newEntries.forEach(([key, value]) => {
             sessionStorage.setItem(key, value);
         });
-        
-        return true; 
+        window.location.hash = "#payment";
+        return false; 
     }
     const appointmentForm = document.getElementById('appointment-form');
     appointmentForm.addEventListener('submit', (event) => {
-        if (!doubleCheckAndSave(appointmentForm)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
+        event.preventDefault(); // Prevent form submission if validation fails
+        doubleCheckAndSave(appointmentForm)
     });
 
 })();

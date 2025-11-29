@@ -30,13 +30,13 @@ function doubleCheckAndSave(form) {
         sessionStorage.setItem('Service', service);
         sessionStorage.setItem('Comments', comments);
         // Here you can add code to actually save the feedback, e.g., send it to a server
-        return true; // Proceed with form submission
+        window.location.hash = "#showFormValue";
+        return false; // Proceed with form submission
     }
     const feedbackForm = document.getElementById('feedback-form');
     feedbackForm.addEventListener('submit', (event) => {
-        if (!doubleCheckAndSave(feedbackForm)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
+        event.preventDefault();
+        doubleCheckAndSave(feedbackForm)
     });
 
 })();

@@ -74,14 +74,13 @@ const passwordInfoElement = document.querySelector('.password-requirements');
         sessionStorage.setItem("Username", username);
         sessionStorage.setItem("Email", email);
         sessionStorage.setItem("Password", password);
-
-        return true; // allow form submission
+        window.location.hash = "#showFormValue";
+        return false; // allow form submission
     };
     const signUpForm = document.getElementById('sign-up-form');
     signUpForm.addEventListener('submit', (event) => {
-        if (!doubleCheckAndSave(signUpForm)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
+        event.preventDefault(); // Prevent form submission if validation fails
+        doubleCheckAndSave(signUpForm)
     });
 
     function initSignUpForm(password, confirmPassword) {

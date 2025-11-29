@@ -20,7 +20,7 @@
 <div class="sign-in-page usingFormDefaultStyle">
     <div class="form-container">
         <h1>Sign In to Your Account</h1>
-        <form id="sign-in-form" action="#" method="post">
+        <form id="sign-in-form" action="javascript:void(0)" method="post">
             <div class="form-input-group">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" class="form-input"
@@ -58,6 +58,7 @@
         } else {
             alert("Invalid username or password. Please try again.");
         }
+        return false;
     }
     const form = document.getElementById('sign-in-form');
     form.onsubmit = function(event) {

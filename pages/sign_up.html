@@ -20,7 +20,7 @@
 <div class="sign-up-page usingFormDefaultStyle">
     <div class="form-container">
         <h1>Register as a C.C.S. Member</h1>
-        <form id="sign-up-form" action="#showFormValue" method="post">
+        <form id="sign-up-form" action="javascript:void(0)" method="post">
             <div class="form-input-group">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" class="form-input"
@@ -126,14 +126,13 @@
         sessionStorage.setItem("Username", username);
         sessionStorage.setItem("Email", email);
         sessionStorage.setItem("Password", password);
-
-        return true; // allow form submission
+        window.location.hash = "#showFormValue";
+        return false; // allow form submission
     };
     const signUpForm = document.getElementById('sign-up-form');
     signUpForm.addEventListener('submit', (event) => {
-        if (!doubleCheckAndSave(signUpForm)) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
+        event.preventDefault(); // Prevent form submission if validation fails
+        doubleCheckAndSave(signUpForm)
     });
 
     function initSignUpForm(password, confirmPassword) {
