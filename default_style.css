@@ -129,14 +129,14 @@ nav.top-bar a {
 }
 
 /* Dropdown styles */
-.dropdown {
+div.dropdown {
     position: relative;
     display: inline-block;
     width: 100%;
-    border: none !important;
+    border: none;
 }
 
-.dropbtn {
+a.dropbtn {
     border: none;
 }
 
@@ -152,7 +152,7 @@ nav.top-bar a {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
-    top: 150%;
+    top: 135%;
     left: 0;
     border: 1px solid var(--nav-text-color);
 }

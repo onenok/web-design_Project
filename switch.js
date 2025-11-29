@@ -17,30 +17,24 @@ function fetchPage(page, contentDiv) {
     const JsFile = `js/${pageName}.js`;     // js/home.js (relative to base)
 
     fetch(pageFile)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('failed to load page');
-            }
-            return response.text();
-        })
-        .then(data => {
-            contentDiv.innerHTML = data;
-            // update URL，add #pageName
-            //const newUrl = location.pathname + `#${tempName}`;
-            //history.pushState({ page: pageName }, '', newUrl);
-            // update title
-            document.title = `C.C.S. - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
-            // set focus to content div for accessibility
-            contentDiv.focus();
-        })
-        .catch(error => {
-            contentDiv.innerHTML = `<p tabindex="-1">failed to load page "${pageName}", please try again later。</p>`;
-            console.error(error);
-        });
-    // load associated JS file if exists
-    const allExistingScripts = document.querySelectorAll('script[data-page-script]');
-    allExistingScripts.forEach(script => {script.remove();}); // remove previously added page scripts
-    fetch(JsFile) // check if JS file exists
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('failed to load page');
+        }
+        return response.text();
+    })
+    .then(data => {
+        contentDiv.innerHTML = data;
+        // update URL，add #pageName
+        //const newUrl = location.pathname + `#${tempName}`;
+        //history.pushState({ page: pageName }, '', newUrl);
+        // update title
+        document.title = `C.C.S. - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
+        // set focus to content div for accessibility
+        contentDiv.focus();
+        const allExistingScripts = document.querySelectorAll('script[data-page-script]');
+        allExistingScripts.forEach(script => {script.remove();}); // remove previously added page scripts
+        fetch(JsFile) // check if JS file exists
         .then(response => {
             if (response.ok) {
                 return response.text();
@@ -53,11 +47,17 @@ function fetchPage(page, contentDiv) {
             script.src = JsFile;
             script.setAttribute('data-name', pageName);
             script.setAttribute('data-page-script', 'true');
+            script.setAttribute('type', 'module');
             document.body.appendChild(script);
         })
         .catch(error => {
             // pass
         });
+    })
+    .catch(error => {
+        contentDiv.innerHTML = `<p tabindex="-1">failed to load page "${pageName}", please try again later。</p>`;
+        console.error(error);
+    });
 }
 
 // handle page load URL (support direct access to #{pageName})
