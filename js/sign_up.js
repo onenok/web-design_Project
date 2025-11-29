@@ -64,6 +64,11 @@ const passwordInfoElement = document.querySelector('.password-requirements');
             alert("Please enter a valid email address.");
             return false; // prevent form submission
         }
+        const confirmation = confirm(`Please confirm your Submit: `);
+        if (!confirmation) {
+            return false; // Cancel form submission
+        }
+        alert("Registration successful!");
         sessionStorage.clear();
         sessionStorage.setItem("submittedItems", ["Username", "Email", "Password"].toString());
         sessionStorage.setItem("Username", username);
