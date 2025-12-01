@@ -1,7 +1,8 @@
 // Extracted scripts from feedback.html
 
 (function () {
-function doubleCheckAndSave(form) {
+console.log('Feedback page script loaded');
+    function doubleCheckAndSave(form) {
         const name = form.name.value.trim();
         const email = form.email.value.trim();
         const service = form.service.value;

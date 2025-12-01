@@ -1,7 +1,8 @@
 // Extracted scripts from payment.html
 
 (function () {
-const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
+console.log('Payment page script loaded');
+    const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
     console.log(items);
     document.getElementById("value-display").innerHTML = `<h3>The items you submitted are: ${items.toString()}</h3><br>`;
 

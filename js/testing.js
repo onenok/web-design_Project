@@ -1,7 +1,8 @@
 // Extracted scripts from testing.html
 
 (function () {
-// Find the test div and display viewport dimensions
+console.log('Testing page script loaded');
+    // Find the test div and display viewport dimensions
     const testDiv = document.querySelector('div.test');
     const updateViewport = () => {
         const vw = window.innerWidth;

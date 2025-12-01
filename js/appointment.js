@@ -1,7 +1,8 @@
 // Extracted scripts from appointment.html
 
 (function () {
-const hash = window.location.hash;
+console.log('Appointment page script loaded');
+    const hash = window.location.hash;
     let service = null;
     if (hash.includes('?')) {
         const params = new URLSearchParams(hash.split('?')[1]);

@@ -1,7 +1,8 @@
 // Extracted scripts from sign_up.html
 
 (function () {
-const passwordInfoElement = document.querySelector('.password-requirements');
+console.log('Sign-up page script loaded');
+    const passwordInfoElement = document.querySelector('.password-requirements');
     const passwordRules = {
         length: {
             regex: /.{8,}/,
