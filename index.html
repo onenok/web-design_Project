@@ -89,6 +89,47 @@
             </footer>
         </div>
     </div>
+    <script>
+        window.addEventListener('resize', () => {
+            const vw = window.innerWidth;
+            if (vw < 1159) {
+                // Show an overlay when the viewport width is less than 1159px
+                let overlay = document.getElementById('unsupported-overlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'unsupported-overlay';
+                    overlay.style.position = 'fixed';
+                    overlay.style.top = '0';
+                    overlay.style.left = '0';
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                    overlay.style.color = '#fff';
+                    overlay.style.display = 'flex';
+                    overlay.style.alignItems = 'center';
+                    overlay.style.justifyContent = 'center';
+                    overlay.style.fontSize = '1.5rem';
+                    overlay.style.zIndex = '1000';
+                    overlay.style.textAlign = 'center';
+                    overlay.innerHTML = `<p>
+                    This site is not supported on viewport widths less than 1159px.<br>
+                    Please resize your browser window Or use a device with a larger screen.
+                    </p>`;
+                    document.body.appendChild(overlay);
+                }
+                overlay.style.display = 'flex';
+            } else {
+                //TODO: remove the overlay if any
+                const overlay = document.getElementById('unsupported-overlay');
+                if (overlay) {
+                    // remove the overlays
+                    overlay.remove();
+                }
+            }
+        });
+        // Trigger the resize event on page load to check the initial size
+        window.dispatchEvent(new Event('resize'));
+    </script>
 </body>
 
 </html>
