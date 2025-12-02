@@ -232,7 +232,7 @@ footer {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
 }
-.main-content > :nth-child(2) button {
+.main-content > :nth-child(2) button:not(.form-link-button) {
     margin-left: auto;
     margin-right: auto;
     position: relative;

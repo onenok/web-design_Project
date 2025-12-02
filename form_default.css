@@ -63,6 +63,19 @@
     border-color: #2196F3;
 }
 
+.form-link-button {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.form-link-button:hover,
+.form-link-button:focus {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
 .radio-checkmark {
     position: absolute;
     top: -1px;
