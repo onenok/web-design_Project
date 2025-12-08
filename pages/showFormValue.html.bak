@@ -2,10 +2,12 @@
 <!--It will be add in to a <div> element-->
 <!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
 <style>
-    /*
     .show-form-value-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
     }
-    */
 </style>
 <div class="show-form-value-page">
     <h1>Show Form Values</h1>
@@ -16,7 +18,7 @@
     </section>
 </div>
 <script>
-    console.log('Show Form Values page script loaded');
+    console.log('Payment page script loaded');
     const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
     console.log(items);
     document.getElementById("value-display").innerHTML = `<h3>The items you submitted are: ${items.toString()}</h3><br>`;

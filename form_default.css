@@ -19,7 +19,9 @@
     color: var(--text-color);
 }
 
-.form-input, .form-textarea, .form-select {
+.form-input,
+.form-textarea,
+.form-select {
     color: var(--text-color);
     width: 100%;
     padding: 10px 20px;
@@ -58,22 +60,23 @@
     cursor: pointer;
 }
 
-.form-radio-label .form-radio-input:checked ~ .radio-checkmark {
+.form-radio-label .form-radio-input:checked~.radio-checkmark {
     background-color: #2196F3;
     border-color: #2196F3;
 }
 
 .form-link-button {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s ease;
+    border: none;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
 }
 
 .form-link-button:hover,
 .form-link-button:focus {
-  color: #0056b3;
-  text-decoration: underline;
+    color: #0056b3;
+    text-decoration: underline;
 }
 
 .radio-checkmark {
@@ -100,7 +103,7 @@
     background: white;
 }
 
-.form-radio-label .form-radio-input:checked ~ .radio-checkmark:after {
+.form-radio-label .form-radio-input:checked~.radio-checkmark:after {
     display: block;
 }
 
@@ -123,6 +126,7 @@
     border-color: red;
 
 }
+
 .invalid:focus {
     box-shadow: 0 0 10px red;
     outline: 1px solid red;

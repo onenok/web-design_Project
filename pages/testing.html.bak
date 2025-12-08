@@ -5,7 +5,6 @@
         background-color: limegreen;
         width: 100vw !important;
         height: 100vh !important;
-        padding: 0;
         display: block;
         position: relative;
     }

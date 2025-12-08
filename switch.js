@@ -29,7 +29,7 @@ function fetchPage(page, contentDiv) {
         //const newUrl = location.pathname + `#${tempName}`;
         //history.pushState({ page: pageName }, '', newUrl);
         // update title
-        document.title = `C.C.S. - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
+        document.title = `C.C.S - ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
         // set focus to content div for accessibility
         contentDiv.focus();
         const allExistingScripts = document.querySelectorAll('script[data-page-script]');
@@ -37,21 +37,38 @@ function fetchPage(page, contentDiv) {
         fetch(JsFile) // check if JS file exists
         .then(response => {
             if (response.ok) {
+                console.log(`Loading JS file: ${JsFile}`);
                 return response.text();
             }
-            throw new Error('no associated JS file');
+            if (response.status === 404) {
+                throw new Error('404');
+            }
+            throw new Error('failed to load JS file');
         })
         .then(() => {
-            // add the script to the document, even it was already added, cuz we need to run it again
+            console.log(`JS file found for page "${pageName}", loading it.`);
+            // Remove any existing script for this page (already done above, but double‑check)
+            const existing = document.querySelector(`script[data-page-script][data-name="${pageName}"]`);
+            if (existing) {
+                existing.remove();
+                console.log(`Removed existing script for page ${pageName}`);
+            }
+            // Create a fresh script element with a cache‑busting query string
             const script = document.createElement('script');
-            script.src = JsFile;
+            script.src = `${JsFile}?t=${Date.now().toString(16)}`;
             script.setAttribute('data-name', pageName);
             script.setAttribute('data-page-script', 'true');
             script.setAttribute('type', 'module');
             document.body.appendChild(script);
+            console.log(`JS file "${JsFile}" loaded and appended to document.`);
         })
         .catch(error => {
-            // pass
+            if (error.message !== '404') {
+                console.error(error);
+            }
+            else {
+                console.info(`Page "${pageName}" has no associated JS file.`);
+            }
         });
     })
     .catch(error => {

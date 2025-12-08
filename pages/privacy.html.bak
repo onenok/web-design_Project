@@ -1,13 +1,13 @@
 <!--This is not a independent page-->
 <!--It will be add in to a <div> element-->
 <!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
-
-
 <style>
-    /*
     .privacy-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
     }
-    */
 </style>
 <div class="privacy-page">
     <h1>Privacy Policy</h1>
