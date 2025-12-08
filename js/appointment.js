@@ -1,19 +1,25 @@
 // Extracted scripts from appointment.html
 
+console.log('appointment page script loaded.');
+
 (function () {
+console.log('appointment page script loaded Double Check.');
+
 console.log('Appointment page script loaded');
     const hash = window.location.hash;
-    let service = null;
+    let serviceType = null; // 儲存當前是哪種服務 (e.g., 'car-inspection')
+
     if (hash.includes('?')) {
         const params = new URLSearchParams(hash.split('?')[1]);
-        service = params.get('service');
+        serviceType = params.get('service');
     }
 
-    if (service) {
-        fetch('./json/services_form.json')
+    if (serviceType) {
+        // 假設 services_form.json 檔案路徑正確
+        fetch('./json/services_form.json') 
             .then(res => res.json())
             .then(data => {
-                const config = data[service];
+                const config = data[serviceType];
                 if (!config) {
                     document.getElementById('form-fields').innerHTML = '<p>找不到對應的服務設定。</p>';
                     return;
@@ -28,78 +34,137 @@ console.log('Appointment page script loaded');
                 config.fields.forEach(field => {
                     let html = '';
                     if (field.type === 'select') {
+                        // 使用 option 的 label 作為 value，並儲存 price 和 discount 到 data 屬性
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
                                 <select class="form-select" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>
-                                    ${field.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                                    ${field.options.map(opt => 
+                                        `<option value="${opt.label}" 
+                                                 data-price="${opt.price || ''}" 
+                                                 data-discount="${opt.discount_percent || 100}">
+                                            ${opt.label} -- ${opt.price == '聯繫報價' ? '聯繫報價' : 'HKD $' + opt.price}
+                                        </option>`
+                                    ).join('')}
                                 </select>`;
                     } else if (field.type === 'textarea') {
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
                                 <textarea class="form-textarea" cols="${field.cols || ''}" rows="${field.rows || ''}" placeholder="${field.placeholder}" id="${field.name}" name="${field.name}"></textarea>`;
                     } else {
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                                <input type="${field.type}" placeholder="${field.placeholder}" class="form-input" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>`;
+                                <input type="${field.type}" placeholder="${field.placeholder}" class="form-input" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} min="${field.min || ''}">`;
                     }
                     const div = document.createElement('div');
                     div.className = 'form-input-group';
                     div.innerHTML = html;
                     container.appendChild(div);
                 });
+
+                // 電話號碼驗證邏輯 (使用簡單正則表達式替代 validator.js)
                 const telInput = document.getElementById('phone');
-                console.log(telInput);
                 if (telInput) {
-                    console.log('telInput found');
                     telInput.addEventListener('input', () => {
-                        if (validator.isMobilePhone(telInput.value, 'zh-HK')) {
+                        // 簡單檢查香港電話號碼格式: +852 開頭，後面 8 位數字
+                        const hkPhoneRegex = /^\+852\s?[4-9]\d{3}( )?\d{4}$/; 
+                        if (hkPhoneRegex.test(telInput.value.trim())) {
                             telInput.setCustomValidity('');
                         } else {
-                            telInput.setCustomValidity('Invalid phone number. Please enter a valid Hong Kong phone number.');
+                            telInput.setCustomValidity('無效的電話號碼。請輸入有效的香港電話號碼 (+852 xxxx xxxx)。');
                         }
                         telInput.reportValidity();
                     });
                 }
-                else {
-                    console.log('telInput not found', "", document.getElementById('form-fields').innerHTML);
-                }
             });
         
     }
+
+
     function doubleCheckAndSave(form) {
+        console.log('Form submission triggered');
         const formData = new FormData(form);
         const entries = Array.from(formData.entries());
         let allValid = true;
-        entries //check if any required field is empty
-            .forEach(([key, value]) => {
-                if (!value.trim()) {
-                    alert(`Please fill in all required fields: ${key}`);
+        
+        // 基本驗證
+        console.log('Starting basic validation');
+        entries.forEach(([key, value]) => {
+            if (!value.trim()) {
+                alert(`請填寫所有必填欄位: ${key}`);
+                allValid = false;
+            }
+            if (key.toLowerCase().includes('email')) {
+                // 簡單 Email 格式檢查
+                const emailRegex = /\S+@\S+\.\S+/;
+                if (!emailRegex.test(value.trim())) {
+                    alert("無效的 Email 地址。請輸入有效的 Email 地址。");
                     allValid = false;
                 }
-                if (key.toLowerCase().includes('email')) {
-                    if (!validator.isEmail(value.trim())) {
-                        alert("Invalid email address\nPlease enter a valid email address.");
-                        allValid = false;
-                    }
-                }
-            });
+            }
+        });
         if (!allValid) return false;
-        const confirmation = confirm("Please confirm your appointment information is correct. Submit?");
+
+        console.log('Basic validation passed');
+
+        // 價格計算與確認
+        let totalAmount = 0;
+        let selectedServiceName = '';
+
+        console.log('Calculating price and preparing confirmation message');
+        // 找到 Select 欄位的選項，計算價格
+        const serviceSelectElement = form.querySelector('select[name="inspection_type"], select[name="repair_type"], select[name="wash_type"]');
+        
+        if (serviceSelectElement) {
+            const selectedOption = serviceSelectElement.options[serviceSelectElement.selectedIndex];
+            selectedServiceName = selectedOption.value;
+            const price = selectedOption.getAttribute('data-price');
+            const discount = selectedOption.getAttribute('data-discount');
+
+            if (price === '聯繫報價') {
+                 alert("您選擇的服務需要聯繫我們獲取報價，請等待我們的確認電話。");
+                 totalAmount = null; 
+            } else if (price && discount) {
+                const originalPrice = parseFloat(price);
+                const discountRate = parseFloat(discount) / 100; // e.g. 90 -> 0.9
+                totalAmount = originalPrice * discountRate;
+            }
+        }
+        console.log('Preparing confirmation message');
+        // 確認信息
+        let confirmationMessage = "請確認您的預約信息是否正確:\n\n";
+        const newEntries = entries.map(([key,value]) => [key.charAt(0).toUpperCase() + key.slice(1), value]);
+        newEntries.forEach(([key, value]) => {
+             confirmationMessage += `${key}: ${value}\n`;
+        });
+
+        if (totalAmount > 0) {
+            confirmationMessage += `\n預計總金額: HKD $${totalAmount.toFixed(2)}`;
+        }
+        
+        const confirmation = confirm(confirmationMessage);
         if (!confirmation) {
             return false;
         }
-        alert("Thank you for your appointment! Proceeding to payment page.");
-        
+
+        // 儲存到 sessionStorage 並跳轉 (保留了原有的 sessionStorage 邏輯)
+        alert("感謝您的預約！即將跳轉到付款頁面。");
         sessionStorage.clear();
-        const newEntries = entries.map(([key,value]) => [key.charAt(0).toUpperCase() + key.slice(1), value]);
-        sessionStorage.setItem('submittedItems', newEntries.map(([key]) => key).toString());
         newEntries.forEach(([key, value]) => {
             sessionStorage.setItem(key, value);
         });
+        
+        // 儲存最終價格，方便支付頁面使用
+        sessionStorage.setItem('FinalAmount', totalAmount == null ? '聯繫報價' : totalAmount.toFixed(2));
+        const keys = newEntries.map(([key]) => key);
+        keys.push('FinalAmount');
+        console.log(keys.toString());
+        sessionStorage.setItem('submittedItems', keys.toString());
+
         window.location.hash = "#payment";
         return false; 
     }
+
     const appointmentForm = document.getElementById('appointment-form');
     appointmentForm.addEventListener('submit', (event) => {
         event.preventDefault(); // Prevent form submission if validation fails
-        doubleCheckAndSave(appointmentForm)
+        doubleCheckAndSave(appointmentForm);
     });
 
 })();

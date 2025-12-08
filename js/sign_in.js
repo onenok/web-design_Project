@@ -1,6 +1,10 @@
 // Extracted scripts from sign_in.html
 
+console.log('sign-in page script loaded.');
+
 (function () {
+console.log('sign-in page script loaded Double Check.');
+
 console.log('Sign-in page script loaded');
     function handlefunc(form) {
         const username = form.username.value;

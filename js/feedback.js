@@ -1,6 +1,10 @@
 // Extracted scripts from feedback.html
 
+console.log('feedback page script loaded.');
+
 (function () {
+console.log('feedback page script loaded Double Check.');
+
 console.log('Feedback page script loaded');
     function doubleCheckAndSave(form) {
         const name = form.name.value.trim();

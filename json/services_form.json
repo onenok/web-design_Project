@@ -1,116 +1,80 @@
 {
   "car-inspection": {
-    "title": "Car Check Booking And Online Quotation",
+    "title": "車輛檢查預約與線上報價",
     "fields": [
-      { 
-        "label": "Name", "type": "text", "name": "name",
-        "required": true, "placeholder": "Enter your name" 
+      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
+      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
+      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+      {
+        "label": "檢查類型",
+        "type": "select",
+        "name": "inspection_type",
+        "options": [
+          { "label": "全車綜合檢查 (100+項目)", "price": 1000, "discount_percent": 90 },
+          { "label": "引擎電腦診斷 (OBD-II)", "price": 700, "discount_percent": 85 },
+          { "label": "煞車系統安全檢查", "price": 450, "discount_percent": 100 },
+          { "label": "廢氣排放測試", "price": 300, "discount_percent": 100 }
+        ],
+        "required": true
       },
-      { 
-        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
-        "required": true, "placeholder": "e.g. +852 6789 1234" 
-      },
-      { 
-        "label": "Email", "type": "email", "name": "email", 
-        "required": true, "placeholder": "Enter your email" 
-      },
-      { 
-        "label": "Inspection Type", "type": "select", "name": "inspection_type",
-        "options": ["Comprehensive Inspection", "Fault Diagnosis", "Safety Check", "Emission Test"], "required": true 
-      },
-      { 
-        "label": "Appointment Date", "type": "date", "name": "date", "required": true },
-      { 
-        "label": "Notes", "type": "textarea", "name": "note",
-        "placeholder": "Describe any specific concerns or issues"
-      }
+      { "label": "預約日期", "type": "date", "name": "date", "required": true },
+      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "描述任何特定的疑慮或問題" }
     ]
   },
   "car-repair": {
-    "title": "Car Repair Booking And Online Quotation",
+    "title": "汽車維修預約與線上報價",
     "fields": [
-      { 
-        "label": "Name", "type": "text", "name": "name",
-        "required": true, "placeholder": "Enter your name"
+      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
+      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
+      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+      {
+        "label": "維修/保養類型",
+        "type": "select",
+        "name": "repair_type",
+        "options": [
+          { "label": "定期小保養 (A Plan)", "price": 800, "discount_percent": 90 },
+          { "label": "定期大保養 (B Plan)", "price": 1800, "discount_percent": 85 },
+          { "label": "引擎調校/維修", "price": "聯繫報價", "discount_percent": 100 },
+          { "label": "懸吊系統維修", "price": "聯繫報價", "discount_percent": 100 },
+          { "label": "煞車系統維修", "price": "聯繫報價", "discount_percent": 100 }
+        ],
+        "required": true
       },
-      { 
-        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
-        "required": true, "placeholder": "e.g. +852 6789 1234"
-      },
-      { 
-        "label": "Email", "type": "email", "name": "email",
-        "required": true, "placeholder": "Enter your email"
-      },
-      { 
-        "label": "Repair Type", "type": "select", "name": "repair_type",
-        "options": ["Regular Maintenance", "Major Repairs", "Engine Inspection", "Suspension System Repair", "Brake System Repair"], "required": true 
-      },
-      { 
-        "label": "Appointment Date", "type": "date", "name": "date",
-        "required": true 
-      },
-      { 
-        "label": "Notes", "type": "textarea", "name": "note",
-        "placeholder": "Describe the issues or services needed"
-      }
+      { "label": "預約日期", "type": "date", "name": "date", "required": true },
+      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "描述具體問題或所需服務" }
     ]
   },
   "car-wash": {
-    "title": "Car Wash and Detailing Booking",
+    "title": "汽車美容與護理預約",
     "fields": [
-      { 
-        "label": "Name", "type": "text", "name": "name",
-        "required": true, "placeholder": "Enter your name" 
+      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
+      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
+      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+      {
+        "label": "服務項目",
+        "type": "select",
+        "name": "wash_type",
+        "options": [
+          { "label": "標準內外清潔 (Basic Wash)", "price": 180, "discount_percent": 100 },
+          { "label": "深度清潔與消毒 (Deep Clean)", "price": 450, "discount_percent": 90 },
+          { "label": "專業打蠟護理 (Wax Care)", "price": 600, "discount_percent": 80 },
+          { "label": "內裝精緻護理 (Interior Detail)", "price": 500, "discount_percent": 90 }
+        ],
+        "required": true
       },
-      { 
-        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
-        "required": true, "placeholder": "e.g. +852 6789 1234" 
-      },
-      { 
-        "label": "Email", "type": "email", "name": "email",
-        "required": true, "placeholder": "Enter your email" 
-      },
-      { 
-        "label": "Service Item", "type": "select", "name": "wash_type",
-        "options": ["Basic Car Wash", "Deep Cleaning", "Wax Care", "Interior Cleaning"], "required": true 
-      },
-      { 
-        "label": "Appointment Date", "type": "date", "name": "date",
-        "required": true 
-      },
-      { 
-        "label": "Notes", "type": "textarea", "name": "note",
-        "placeholder": "Any special requests or instructions"
-      }
+      { "label": "預約日期", "type": "date", "name": "date", "required": true },
+      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "任何特殊要求或指示" }
     ]
   },
   "parts-sales": {
-    "title": "Car Parts Purchase and Ordering",
+    "title": "汽車零件訂購與查詢",
     "fields": [
-      { 
-        "label": "Name", "type": "text", "name": "name",
-        "required": true, "placeholder": "Enter your name"
-      },
-      { 
-        "label": "Contact Phone(HK, '+852' is required)", "type": "tel", "name": "phone",
-        "required": true, "placeholder": "e.g. +852 6789 1234"
-      },
-      { 
-        "label": "Email", "type": "email", "name": "email",
-        "required": true, "placeholder": "Enter your email"
-      },
-      { 
-        "label": "Part Name(s)(split with commas)", "type": "text", "name": "part_names-list",
-        "required": true, "placeholder": "e.g. Brake Pads, Air Filter"
-      },
-      { 
-        "label": "Quantity", "type": "number", "name": "quantity",
-        "required": true, "min": 1, "placeholder": "Enter quantity needed"
-      },
-      { 
-        "label": "Notes", "type": "textarea", "name": "note",
-        "placeholder": "Specify any particular brand, model, or specifications"
-      }
+      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
+      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
+      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+      { "label": "零件名稱 (以逗號分隔)", "type": "text", "name": "part_names-list", "required": true, "placeholder": "e.g. 煞車皮, 空氣濾芯" },
+      { "label": "數量", "type": "number", "name": "quantity", "required": true, "min": 1, "placeholder": "輸入所需數量" },
+      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "指定特定品牌、型號或規格" }
     ]
   }
 }

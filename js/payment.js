@@ -1,6 +1,10 @@
 // Extracted scripts from payment.html
 
+console.log('payment page script loaded.');
+
 (function () {
+console.log('payment page script loaded Double Check.');
+
 console.log('Payment page script loaded');
     const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
     console.log(items);

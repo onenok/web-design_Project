@@ -1,6 +1,10 @@
 // Extracted scripts from testing.html
 
+console.log('testing page script loaded.');
+
 (function () {
+console.log('testing page script loaded Double Check.');
+
 console.log('Testing page script loaded');
     // Find the test div and display viewport dimensions
     const testDiv = document.querySelector('div.test');

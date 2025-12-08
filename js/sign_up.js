@@ -1,6 +1,10 @@
 // Extracted scripts from sign_up.html
 
+console.log('sign-up page script loaded.');
+
 (function () {
+console.log('sign-up page script loaded Double Check.');
+
 console.log('Sign-up page script loaded');
     const passwordInfoElement = document.querySelector('.password-requirements');
     const passwordRules = {
