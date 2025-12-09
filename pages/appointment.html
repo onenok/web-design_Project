@@ -67,9 +67,10 @@
                                     ${field.options.map(opt => {
                                         opt.price = opt.price || 0;
                                         opt.discount_percent = Math.max(0,Math.min(100, opt.discount_percent || 100));
+                                        const savePercent = 100 - opt.discount_percent;
                                         let final_price = opt.price;
                                         if (opt.price != '聯繫報價')  final_price = (opt.price * (opt.discount_percent / 100)).toFixed(2);
-                                        const price_label = opt.price == '聯繫報價' ? '聯繫報價' : (opt.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${opt.price})` : `HKD $${opt.price}`);
+                                        const price_label = opt.price == '聯繫報價' ? '聯繫報價' : (opt.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${opt.price}, 節省 ${savePercent}%)` : `HKD $${opt.price}`);
                                         return `<option value="${opt.label}" 
                                                 data-final-price="${final_price}"
                                                 data-price="${opt.price}" 
