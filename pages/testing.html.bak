@@ -1,0 +1,26 @@
+<style>
+    div.test {
+        font-size: 2rem;
+        color: blue;
+        background-color: limegreen;
+        width: 100vw !important;
+        height: 100vh !important;
+        display: block;
+        position: relative;
+    }
+</style>
+<div class="test">This is a test</div>
+<script>
+    console.log('Testing page script loaded');
+    // Find the test div and display viewport dimensions
+    const testDiv = document.querySelector('div.test');
+    const updateViewport = () => {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        testDiv.innerHTML = `Viewport: ${vw}px × ${vh}px`;
+    };
+    // Initial update
+    updateViewport();
+    // Update on window resize
+    window.addEventListener('resize', updateViewport);
+</script>

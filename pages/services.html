@@ -1,0 +1,63 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .services-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+</style>
+<div class="services-page">
+    <h1>Our Services</h1>
+    <p>Car Comprehensive Services Ltd. provides comprehensive automotive care services.</p>
+    <section>
+        <h2>Main Service Items</h2>
+        <section style="display: flex; flex-direction: row; gap: 20px; justify-content: space-around;">
+            <div>
+                <h2><a href="#car-inspection">Car Inspection</a></h2>
+                <ul data-service="car-inspection">
+                    
+                </ul>
+            </div>
+            <img src="./img/car_inspection.jpeg" alt="Car Inspection Image" style="max-width: 50%; height: auto; border: 1px solid var(--nav-text-color);">
+        </section>
+        <section style="display: flex; flex-direction: row; gap: 20px; justify-content: space-around;">
+            <div>
+                <h2><a href="#car-repair">Car Repair</a></h2>
+                <ul>
+                    <li>Regular Maintenance</li>
+                    <li>Major Repairs</li>
+                    <li>Engine Inspection</li>
+                    <li>Brake System Repair</li>
+                </ul>
+            </div>
+            <img src="./img/car_repair.jpeg" alt="Car Repair Image" style="max-width: 50%; height: auto; border: 1px solid var(--nav-text-color);">
+        </section>
+        <section style="display: flex; flex-direction: row; gap: 20px; justify-content: space-around;">
+            <div>
+                <h2><a href="#car-wash">Car Wash</a></h2>
+                <ul>
+                    <li>Interior and Exterior Cleaning</li>
+                    <li>Polishing</li>
+                    <li>Waxing</li>
+                    <li>Detailing Services</li>
+                </ul>
+            </div>
+            <img src="./img/car_wash.jpeg" alt="Car Wash Image" style="max-width: 50%; height: auto; border: 1px solid var(--nav-text-color);">
+        </section>
+        <section style="display: flex; flex-direction: row; gap: 20px; justify-content: space-around;">
+            <div>
+                <h2><a href="#parts-sales">Parts Sales</a></h2>
+                <ul>
+                    <li>Original Parts</li>
+                    <li>Aftermarket Parts</li>
+                    <li>Components</li>
+                    <li>Accessories</li>
+                </ul>
+            </div>
+            <img src="./img/parts_sales.jpeg" alt="Parts Sales Image" style="max-width: 50%; height: auto; border: 1px solid var(--nav-text-color);">
+        </section>
+    </section>
+</div>

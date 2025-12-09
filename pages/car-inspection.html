@@ -1,0 +1,61 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .vehicle-inspection-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .vehicle-inspection-page h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .vehicle-inspection-page h2 {
+        color: #555;
+        margin-top: 20px;
+    }
+    
+    .vehicle-inspection-page ul {
+        margin-left: 20px;
+    }
+    
+    .vehicle-inspection-page li {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="vehicle-inspection-page">
+    <h1>Car Inspection Service</h1>
+    <p>We offer professional car inspection services to ensure your vehicle stays in optimal condition.</p>
+    
+    <section>
+        <h2>Services</h2>
+        <ul>
+            <li><strong>Comprehensive Inspection</strong> - Thorough system checks including engine, transmission, suspension, and more</li>
+            <li><strong>Fault Diagnosis</strong> - Using advanced equipment to diagnose vehicle faults and quickly locate issues</li>
+            <li><strong>Safety Inspection</strong> - Checking brakes, tires, lights, and other safety equipment</li>
+            <li><strong>Emission Testing</strong> - Testing exhaust emissions to ensure compliance with environmental standards</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h2>Advantages of Inspection Service</h2>
+        <ul>
+            <li>Using the latest diagnostic equipment and technology</li>
+            <li>Experienced technical personnel</li>
+            <li>Fast and accurate inspection reports</li>
+            <li>Transparent pricing policy</li>
+        </ul>
+    </section>
+    
+    <section>
+        <button onclick="location.href='#appointment?service=car-inspection'">Book Inspection Service</button>
+    </section>
+
+    <section>
+        <p>If you have any questions, please go to the <a href="#contact">Contact Us</a> page.</p>
+    </section>
+</div>

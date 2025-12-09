@@ -1,0 +1,30 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .show-form-value-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+</style>
+<div class="show-form-value-page">
+    <h1>Show Form Values</h1>
+    <p>This page displays content based on the passed value.</p>
+    <section>
+        <h2>Passed Values</h2>
+        <div id="value-display">Values will be displayed here.</div>
+    </section>
+</div>
+<script>
+    console.log('Payment page script loaded');
+    const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
+    console.log(items);
+    document.getElementById("value-display").innerHTML = `<h3>The items you submitted are: ${items.toString()}</h3><br>`;
+
+    for (let item of items) {
+        const value = sessionStorage.getItem(item);
+        document.getElementById("value-display").innerHTML += `<p><strong>${item}:</strong> ${value}</p>`;
+    }
+</script>

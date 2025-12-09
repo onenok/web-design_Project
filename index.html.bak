@@ -25,7 +25,6 @@
     <link rel="stylesheet" type="text/css" href="./default_style.css">
     <link rel="stylesheet" type="text/css" href="./form_default.css" data-scope=".usingFormDefaultStyle">
     <script src="./switch.js" defer></script>
-    <script src="./nav.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/validator@13.15.23/validator.min.js" defer></script>
     <script src="./particlebg.js" defer></script>
@@ -38,17 +37,19 @@
             <a href="./" class="nav-logo">
                 <span>C.C.S.</span>
             </a>
-            <div class="nav-button" id="navMenu">
+            <div class="nav-button">
                 <div>
                     <a href="#home">Home</a>
                 </div>
-                <div class="dropdown">
-                    <a href="#services" class="dropbtn">Services</a>
-                    <div class="dropdown-content">
-                        <a href="#car-inspection">Car Inspection</a>
-                        <a href="#car-repair">Car Repair</a>
-                        <a href="#car-wash">Car Wash</a>
-                        <a href="#parts-sales">Parts Sales</a>
+                <div>
+                    <div class="dropdown">
+                        <a href="#services" class="dropbtn">Services</a>
+                        <div class="dropdown-content">
+                            <a href="#car-inspection">Car Inspection</a>
+                            <a href="#car-repair">Car Repair</a>
+                            <a href="#car-wash">Car Wash</a>
+                            <a href="#parts-sales">Parts Sales</a>
+                        </div>
                     </div>
                 </div>
                 <div>

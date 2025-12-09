@@ -19,23 +19,36 @@
 </style>
 <div class="feedback-page usingFormDefaultStyle">
     <div class="form-container">
-        <h1>我們重視您的反饋</h1>
-        <form id="feedback-form" action="#" method="post">
+        <h1>Feedback Form</h1>
+        <p>Your feedback is important to us and helps us improve our services.</p>
+        <form id="feedback-form" action="javascript:void(0)" method="post">
             <div class="form-input-group">
-                <label for="name" class="form-label">姓名:</label>
-                <input type="text" id="name" name="name" placeholder="輸入姓名" class="form-input"
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" class="form-input"
                     autocomplete="off" required><br><br>
             </div>
 
             <div class="form-input-group">
-                <label for="email" class="form-label">電子郵件:</label>
-                <input type="email" id="email" name="email" placeholder="輸入電子郵件" class="form-input"
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" class="form-input"
                     required><br><br>
+            </div>
+            
+            <div class="form-input-group">
+                <label for="service" class="form-label">Service Category:</label>
+                <select id="service" name="service" class="form-input" required>
+                    <option value="">Please select a service category</option>
+                    <option value="maintenance">Car Maintenance</option>
+                    <option value="washing">Car Wash</option>
+                    <option value="parts">Parts Sales</option>
+                    <option value="inspection">Car Inspection</option>
+                    <option value="other">Other</option>
+                </select><br><br>
             </div>
 
             <div class="form-input-group">
-                <label for="comments" class="form-label">意見反饋:</label>
-                <textarea id="comments" name="comments" rows="20" cols="50" placeholder="在此輸入您的意見..."
+                <label for="comments" class="form-label">Feedback:</label>
+                <textarea id="comments" name="comments" rows="15" cols="50" placeholder="Please enter your valuable feedback here..."
                     class="form-textarea" required></textarea><br><br>
             </div>
 
@@ -43,3 +56,43 @@
         </form>
     </div>
 </div>
+<script>
+    console.log('Feedback page script loaded');
+    function doubleCheckAndSave(form) {
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const service = form.service.value;
+        const comments = form.comments.value.trim();
+
+        if (!name || !email || !service || !comments) {
+            alert("Please fill in all required fields.");
+            return false;
+        }
+
+        if (!validator.isEmail(email)) {
+            alert("Invalid email address\nPlease enter a valid email address.");
+            return false;
+        }
+
+        const confirmation = confirm(`Please confirm your feedback:\n\nName: ${name}\nEmail: ${email}\nService Category: ${service}\nFeedback: ${comments}\n\nSubmit?`);
+        if (!confirmation) {
+            return false; // Cancel form submission
+        }
+        alert("Thank you for your feedback!");
+        
+        sessionStorage.clear();
+        sessionStorage.setItem('submittedItems', ['Name', 'Email', 'Service', 'Comments']);
+        sessionStorage.setItem('Name', name);
+        sessionStorage.setItem('Email', email);
+        sessionStorage.setItem('Service', service);
+        sessionStorage.setItem('Comments', comments);
+        // Here you can add code to actually save the feedback, e.g., send it to a server
+        window.location.hash = "#showFormValue";
+        return false; // Proceed with form submission
+    }
+    const feedbackForm = document.getElementById('feedback-form');
+    feedbackForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        doubleCheckAndSave(feedbackForm)
+    });
+</script>

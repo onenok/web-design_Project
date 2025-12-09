@@ -1,0 +1,30 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .payment-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+</style>
+<div class="payment-page">
+    <h1>payment is not supported yet</h1>
+    <p>But you can see the submitted values below:</p>
+    <section>
+        <h2>Submitted Values</h2>
+        <div id="value-display">Here will display the submitted values.</div>
+    </section>
+</div>
+<script>
+    console.log('Payment page script loaded');
+    const items = sessionStorage.getItem("submittedItems").split(','); // a list of items []
+    console.log(items);
+    document.getElementById("value-display").innerHTML = `<h3>The items you submitted are: ${items.toString()}</h3><br>`;
+
+    for (let item of items) {
+        const value = sessionStorage.getItem(item);
+        document.getElementById("value-display").innerHTML += `<p><strong>${item}:</strong> ${value}</p>`;
+    }
+</script>

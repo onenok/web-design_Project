@@ -1,0 +1,62 @@
+<!--This is not a independent page-->
+<!--It will be add in to a <div> element-->
+<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
+<style>
+    .car-repair-page {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        height: 100%;
+    }
+    
+    .car-repair-page h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .car-repair-page h2 {
+        color: #555;
+        margin-top: 20px;
+    }
+    
+    .car-repair-page ul {
+        margin-left: 20px;
+    }
+    
+    .car-repair-page li {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="car-repair-page">
+    <h1>Car Repair Service</h1>
+    <p>We offer professional car repair services to ensure your vehicle runs smoothly.</p>
+    
+    <section>
+        <h2>Repair Items</h2>
+        <ul>
+            <li><strong>Regular Maintenance</strong> - Oil changes, filter replacements, fluid checks, and other routine maintenance</li>
+            <li><strong>Minor and Major Repairs</strong> - Part replacements, fault repairs, and upgrades</li>
+            <li><strong>Engine Inspection</strong> - Engine diagnostics, cleaning, and overhaul services</li>
+            <li><strong>Suspension System Repair</strong> - Shock absorbers, springs, axles, and other repairs</li>
+            <li><strong>Brake System Repair</strong> - Brake pads, brake fluid, rotor repairs</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h2>Advantages of Repair Service</h2>
+        <ul>
+            <li>Using original or high-quality parts</li>
+            <li>Experienced technical team with many years of repair experience</li>
+            <li>Providing detailed repair reports</li>
+            <li>Offering repair warranty commitments</li>
+        </ul>
+    </section>
+    
+    <section>
+        <button onclick="location.href='#appointment?service=car-repair'">Book Repair Service</button>
+    </section>
+
+    <section>
+        <p>If you have any questions, please go to the <a href="#contact">Contact Us</a> page.</p>
+    </section>
+</div>

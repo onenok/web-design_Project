@@ -19,19 +19,56 @@
 </style>
 <div class="sign-in-page usingFormDefaultStyle">
     <div class="form-container">
-        <h1>登入帳戶</h1>
-        <form id="sign-in-form" action="#" method="post">
+        <h1>Sign In to Your Account</h1>
+        <form id="sign-in-form" action="javascript:void(0)" method="post">
             <div class="form-input-group">
-                <label for="username" class="form-label">用戶名稱:</label>
-                <input type="text" id="username" name="username" placeholder="輸入用戶名稱" class="form-input"
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" class="form-input"
                     autocomplete="off" required><br><br>
             </div>
             <div class="form-input-group">
-                <label for="password" class="form-label">密碼:</label>
-                <input type="password" id="password" name="password" placeholder="輸入密碼" class="form-input"
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" class="form-input"
                     autocomplete="off" required><br><br>
             </div>
-            <input type="submit" value="登入" class="form-submit-button">
+            <div class="form-input-group">
+                <button type="button" class="form-link-button" onclick="alert('This feature is not implemented yet.');">
+                    Forgot Password
+                </button>
+            </div>
+            <input type="submit" value="Sign In" class="form-submit-button">
         </form>
     </div>
 </div>
+<script>
+    console.log('Sign-in page script loaded');
+    function handlefunc(form) {
+        const username = form.username.value;
+        const password = form.password.value;
+
+        // For demonstration, we use hardcoded credentials.
+        const validCustomUsername = "user123";
+        const validCustomPassword = "pass123";
+
+        const validAdminUsername = "admin";
+        const validAdminPassword = "adminpass";
+        if (username === validAdminUsername && password === validAdminPassword) {
+            alert("Admin sign-in successful!");
+            // Redirect to admin dashboard
+            window.location.hash = "#adminDashboard";
+        } 
+        else if (username === validCustomUsername && password === validCustomPassword) {
+            alert("Sign-in successful!");
+            // Redirect to main page or dashboard
+            window.location.hash = "#home";
+        } else {
+            alert("Invalid username or password. Please try again.");
+        }
+        return false;
+    }
+    const form = document.getElementById('sign-in-form');
+    form.onsubmit = function(event) {
+        event.preventDefault(); // Prevent default form submission
+        handlefunc(form);
+    };
+</script>
