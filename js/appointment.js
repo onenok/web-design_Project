@@ -37,13 +37,19 @@ console.log('Appointment page script loaded');
                         // 使用 option 的 label 作為 value，並儲存 price 和 discount 到 data 屬性
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
                                 <select class="form-select" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>
-                                    ${field.options.map(opt => 
-                                        `<option value="${opt.label}" 
-                                                 data-price="${opt.price || ''}" 
-                                                 data-discount="${opt.discount_percent || 100}">
-                                            ${opt.label} -- ${opt.price == '聯繫報價' ? '聯繫報價' : 'HKD $' + opt.price}
+                                    ${field.options.map(opt => {
+                                        opt.price = opt.price || 0;
+                                        opt.discount_percent = Math.max(0,Math.min(100, opt.discount_percent || 100));
+                                        let final_price = opt.price;
+                                        if (opt.price != '聯繫報價')  final_price = (opt.price * (opt.discount_percent / 100)).toFixed(2);
+                                        const price_label = opt.price == '聯繫報價' ? '聯繫報價' : (opt.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${opt.price})` : `HKD $${opt.price}`);
+                                        return `<option value="${opt.label}" 
+                                                data-final-price="${final_price}"
+                                                data-price="${opt.price}" 
+                                                data-discount="${opt.discount_percent}">
+                                            ${opt.label} -- ${price_label}
                                         </option>`
-                                    ).join('')}
+                                    }).join('')}
                                 </select>`;
                     } else if (field.type === 'textarea') {
                         html = `<label class="form-label" for="${field.name}">${field.label}</label>
@@ -105,25 +111,22 @@ console.log('Appointment page script loaded');
 
         // 價格計算與確認
         let totalAmount = 0;
-        let selectedServiceName = '';
 
         console.log('Calculating price and preparing confirmation message');
         // 找到 Select 欄位的選項，計算價格
-        const serviceSelectElement = form.querySelector('select[name="inspection_type"], select[name="repair_type"], select[name="wash_type"]');
+        const serviceSelectElement = form.querySelector('select[data-price="true"]');
         
         if (serviceSelectElement) {
             const selectedOption = serviceSelectElement.options[serviceSelectElement.selectedIndex];
-            selectedServiceName = selectedOption.value;
+            const finalPrice = selectedOption.getAttribute('data-final-price');
             const price = selectedOption.getAttribute('data-price');
             const discount = selectedOption.getAttribute('data-discount');
 
-            if (price === '聯繫報價') {
+            if (finalPrice === '聯繫報價') {
                  alert("您選擇的服務需要聯繫我們獲取報價，請等待我們的確認電話。");
                  totalAmount = null; 
-            } else if (price && discount) {
-                const originalPrice = parseFloat(price);
-                const discountRate = parseFloat(discount) / 100; // e.g. 90 -> 0.9
-                totalAmount = originalPrice * discountRate;
+            } else {
+                totalAmount = parseFloat(finalPrice);
             }
         }
         console.log('Preparing confirmation message');

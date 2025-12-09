@@ -9,6 +9,7 @@
         "label": "檢查類型",
         "type": "select",
         "name": "inspection_type",
+        "data-price": true,
         "options": [
           { "label": "全車綜合檢查 (100+項目)", "price": 1000, "discount_percent": 90 },
           { "label": "引擎電腦診斷 (OBD-II)", "price": 700, "discount_percent": 85 },
@@ -31,6 +32,7 @@
         "label": "維修/保養類型",
         "type": "select",
         "name": "repair_type",
+        "data-price": true,
         "options": [
           { "label": "定期小保養 (A Plan)", "price": 800, "discount_percent": 90 },
           { "label": "定期大保養 (B Plan)", "price": 1800, "discount_percent": 85 },
@@ -54,6 +56,7 @@
         "label": "服務項目",
         "type": "select",
         "name": "wash_type",
+        "data-price": true,
         "options": [
           { "label": "標準內外清潔 (Basic Wash)", "price": 180, "discount_percent": 100 },
           { "label": "深度清潔與消毒 (Deep Clean)", "price": 450, "discount_percent": 90 },
