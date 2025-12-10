@@ -51,9 +51,9 @@
     
     <div class="sitemap-section">
         <h2><a class="betterA" href="#services">Services</a></h2>
-        <ul id="services-list"></ul>
+        <ul id="services-list">If you see this, please wait or refresh the page.</ul>
         <h2><a class="betterA" href="#appointment">Appointment</a></h2>
-        <ul id="appointment-list"></ul>
+        <ul id="appointment-list">If you see this, please wait or refresh the page.</ul>
     </div>
     
     <div class="sitemap-section">
@@ -87,6 +87,8 @@
         console.log('Service form data loaded:', data);
         const service_list = document.querySelector('#services-list');
         const appointment_list = document.querySelector('#appointment-list');
+        service_list.innerHTML = '';
+        appointment_list.innerHTML = '';
         const allServicesKeys = Object.keys(data);
         let service_html = '';
         let appointment_html = '';

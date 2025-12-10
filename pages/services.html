@@ -30,7 +30,7 @@
     <p>Car Comprehensive Services Ltd. provides comprehensive car care services.</p>
     <section>
         <h2>Main Service Items</h2>
-        <div id="services_container"></div>
+        <div id="services_container">If you see this, please wait or refresh the page.</div>
     </section>
 </div>
 <script>
@@ -39,6 +39,7 @@
     .then(data => {
         console.log('Service form data loaded:', data);
         const services_container = document.querySelector('#services_container');
+        services_container.innerHTML = ''; // Clear the loading message
         const allServices = Object.entries(data);
         let html = '';
         allServices.forEach(([serviceKey, serviceItems]) => {

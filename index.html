@@ -44,11 +44,11 @@
                 </div>
                 <div class="dropdown">
                     <a class="dropbtn" href="#services">Services</a>
-                    <div class="dropdown-content" id="nav-services-list"></div>
+                    <div class="dropdown-content" id="nav-services-list">If you see this, please wait or refresh the page.</div>
                 </div>
                 <div class="dropdown">
                     <a class="dropbtn" href="#appointment">Appointment</a>
-                    <div class="dropdown-content" id="nav-appointment-list"></div>
+                    <div class="dropdown-content" id="nav-appointment-list">If you see this, please wait or refresh the page.</div>
                 </div>
                 <div>
                     <a href="#about">About Us</a>
@@ -109,6 +109,8 @@
         console.log('Service form data loaded:', data);
         const service_list = document.querySelector('#nav-services-list');
         const appointment_list = document.querySelector('#nav-appointment-list');
+        service_list.innerHTML = ''; // Clear the loading message
+        appointment_list.innerHTML = ''; // Clear the loading message
         const allServicesKeys = Object.keys(data);
         let service_html = '';
         let appointment_html = '';

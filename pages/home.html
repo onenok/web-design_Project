@@ -46,7 +46,7 @@
     </div>
     <section>
         <h2><a class="betterA" href="#services">Our Services</a></h2>
-        <ul id="service_list"></ul>
+        <ul id="service_list">If you see this, please wait or refresh the page.</ul>
         <h3 id="Emergency">Emergency Towing Service Hotline: +852 9487 7414</h3>
     </section>
     <section>
@@ -60,6 +60,7 @@
     .then(data => {
         console.log('Service form data loaded:', data);
         const service_list = document.querySelector('#service_list');
+        service_list.innerHTML = ''; // Clear the loading message
         const allServicesKeys = Object.keys(data);
         let html = '';
         allServicesKeys.forEach(serviceKey => {

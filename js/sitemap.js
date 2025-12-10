@@ -11,6 +11,8 @@ fetch('./json/services_form.json')
         console.log('Service form data loaded:', data);
         const service_list = document.querySelector('#services-list');
         const appointment_list = document.querySelector('#appointment-list');
+        service_list.innerHTML = '';
+        appointment_list.innerHTML = '';
         const allServicesKeys = Object.keys(data);
         let service_html = '';
         let appointment_html = '';

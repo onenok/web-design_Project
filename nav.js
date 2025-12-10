@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const signUpButton = document.querySelector('.signin-up-button');
   
   if (!navButton || !navToggle || !navOverflowButton || !overflowList) return;
-
+  let PrevItemsToMove = [];
   // Desktop overflow handling (> 768px)
   function checkForOverflow() {
     // Get all direct child divs (which contain the nav items)
@@ -26,36 +26,39 @@ document.addEventListener('DOMContentLoaded', () => {
         item.removeAttribute('aria-hidden');
         item.removeAttribute('tabindex');
       });
+      navButton.style.top = topBar.offsetHeight + 'px';
       return;
     }
-    if (navButton.classList.contains('open')) {
+    else {
+      navButton.style.top = '';
+      if (navButton.classList.contains('open')) {
       navToggle.setAttribute('aria-expanded', 'false');
       navButton.classList.remove('open');
       document.body.classList.remove('nav-open');
+      }
     }
     // Calculate available width: top-bar width minus logo and sign‑up/in widths
     let containerWidth = navButton.clientWidth;
-    if (topBar && logo && signUpButton && navOverflowButton) {
-      containerWidth = topBar.clientWidth - logo.offsetWidth - signUpButton.offsetWidth - navOverflowButton.offsetWidth;
-    }
     const overflowMenuWidth = 50; // space reserved for overflow button
+    if (topBar && logo && signUpButton && navOverflowButton) {
+      containerWidth = topBar.clientWidth - logo.offsetWidth - signUpButton.offsetWidth - navOverflowButton.offsetWidth - overflowMenuWidth;
+    }
     
     // Clear previous overflow items
     overflowList.innerHTML = '';
     
-    let currentWidth = 0;
     const itemsToMove = [];
+    let currentWidth = 0;
     let navButtonWidth = 0;
     // Iterate through items and check for overflow
     navItems.forEach((item, index) => {
-      // skip it, this only display when vw < 400px in mobile view
-      if (item.className === 'not-enough-space-signin-up-button') return; 
+      if (item.className === 'not-enough-space-signin-up-button') return; // skip it, this only display when vw < 400px in mobile view
       const itemWidth = item.getBoundingClientRect().width;
       console.log(`Nav item ${index} width: ${itemWidth}px`);
       currentWidth += itemWidth;
 
       // If adding this item would exceed container, move it to overflow
-      if (currentWidth + overflowMenuWidth > containerWidth) {
+      if (currentWidth > containerWidth) {
         itemsToMove.push(item.cloneNode(true)); // Clone to overflow list
         item.style.opacity = '0'; // Hide original
         item.style.pointerEvents = 'none';
@@ -71,10 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
         navButtonWidth += itemWidth;
       }
     });
-    if (itemsToMove.length > 0) navButton.style.width = navButtonWidth + 'px';
-    else navButton.style.width = '';
     // Update overflow list
     if (itemsToMove.length > 0) {
+      console.log('overflow detected', { currentWidth, containerWidth, overflowed: itemsToMove.length });
+      navButton.style.width = navButtonWidth + 'px';
       itemsToMove.forEach(item => {
         item.style.opacity = ''; // Show original
         item.style.pointerEvents = '';
@@ -85,12 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       overflowList.classList.add('show');
       navOverflowButton.style.display = 'inline-block';
+      if(PrevItemsToMove.length !== itemsToMove.length) {
+        console.log('Rechecking overflow due to item count change');
+        setTimeout(checkForOverflow, 10); // Recheck in case of multiple overflows
+      }
     } else {
+      navButton.style.width = '';
       overflowList.classList.remove('show');
       navOverflowButton.style.display = '';
     }
-
-    console.log('Desktop overflow check', { currentWidth, containerWidth, overflowed: itemsToMove.length });
+    PrevItemsToMove = itemsToMove;
   }
 
   // Initial check and event listeners
