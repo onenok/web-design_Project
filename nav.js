@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only run for desktop width
     if (window.innerWidth <= 768) {
       navOverflowButton.style.display = '';
-      overflowList.style.display = 'none';
+      overflowList.classList.remove('show');
       overflowList.innerHTML = '';
       navItems.forEach(item => {
         item.style = '';

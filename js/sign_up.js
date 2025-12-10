@@ -34,14 +34,14 @@ console.log('Sign-up page script loaded');
             status: false
         }
     };
-    passwordInfoElement.innerHTML = 'Password must contain：' + Object.values(passwordRules).map(rule => `<span style="color: ${rule.status ? 'green' : 'red'};">${rule.message}</span>`).join('，') + '。';
+    passwordInfoElement.innerHTML = 'Password must contain: ' + Object.values(passwordRules).map(rule => `<span style="color: ${rule.status ? 'green' : 'red'};">${rule.message}</span>`).join(', ') + '.';
     const passwordInput = document.getElementById('password');
     passwordInput.addEventListener('input', () => {
         const passwordValue = passwordInput.value;
         Object.values(passwordRules).forEach(rule => {
             rule.status = rule.regex.test(passwordValue);
         });
-        passwordInfoElement.innerHTML = 'Password must contain：' + Object.values(passwordRules).map(rule => `<span style="color: ${rule.status ? 'green' : 'red'};">${rule.message}</span>`).join('，') + '。';
+        passwordInfoElement.innerHTML = 'Password must contain: ' + Object.values(passwordRules).map(rule => `<span style="color: ${rule.status ? 'green' : 'red'};">${rule.message}</span>`).join(', ') + '.';
     });
     function doubleCheckAndSave(form) {
         const username = form.username.value;

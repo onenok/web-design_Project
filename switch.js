@@ -44,7 +44,7 @@ function fetchPage(page, contentDiv) {
         .then(data => {
             clearInterval(loadingInterval);
             contentDiv.innerHTML = data;
-            // update URL，add #pageName
+            // update URL, add #pageName
             //const newUrl = location.pathname + `#${tempName}`;
             //history.pushState({ page: pageName }, '', newUrl);
             // update title
@@ -92,7 +92,7 @@ function fetchPage(page, contentDiv) {
         })
         .catch(error => {
             clearInterval(loadingInterval);
-            contentDiv.innerHTML = `<p tabindex="-1">failed to load page "${pageName}", please try again later。</p>`;
+            contentDiv.innerHTML = `<p tabindex="-1">failed to load page "${pageName}", please try again later.</p>`;
             console.error(error);
         });
 }

@@ -42,8 +42,13 @@
                 <div>
                     <a href="#home">Home</a>
                 </div>
-                <div>
-                    <a href="#services">Services</a>
+                <div class="dropdown">
+                    <a class="dropbtn" href="#services">Services</a>
+                    <div class="dropdown-content" id="nav-services-list"></div>
+                </div>
+                <div class="dropdown">
+                    <a class="dropbtn" href="#appointment">Appointment</a>
+                    <div class="dropdown-content" id="nav-appointment-list"></div>
                 </div>
                 <div>
                     <a href="#about">About Us</a>
@@ -97,3 +102,26 @@
     </div>
 </body>
 </html>
+<script>
+    fetch('./json/services_form.json') 
+    .then(res => res.json())
+    .then(data => {
+        console.log('Service form data loaded:', data);
+        const service_list = document.querySelector('#nav-services-list');
+        const appointment_list = document.querySelector('#nav-appointment-list');
+        const allServicesKeys = Object.keys(data);
+        let service_html = '';
+        let appointment_html = '';
+        allServicesKeys.forEach(serviceKey => {
+            const a = document.createElement('a');
+            a.href = `#services?scrollTo=${serviceKey}`;
+            a.innerText = data[serviceKey]['service_name'] || serviceKey;
+            service_list.appendChild(a);
+            
+            const a2 = document.createElement('a');
+            a2.href = `#appointment?service=${serviceKey}`;
+            a2.innerText = data[serviceKey].form.title || serviceKey;
+            appointment_list.appendChild(a2);
+        });
+    });
+</script>

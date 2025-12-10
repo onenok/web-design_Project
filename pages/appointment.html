@@ -16,7 +16,6 @@
         margin-bottom: 20px;
         text-align: center;
     }
-    /* 這裡省略其他的 form-default-style CSS，確保您的網站有定義 .form-label, .form-input 等樣式 */
 </style>
 <div class="appointment-page usingFormDefaultStyle">
     <div class="form-container">
@@ -44,7 +43,7 @@
     function loadServiceOptions(serviceType, datas) {
         const config = datas[serviceType];
         if (!config) {
-            container.innerHTML = '<p>找不到對應的服務設定。</p>';
+            container.innerHTML = '<p>No matching service configuration found.</p>';
             return;
         }
 
@@ -56,25 +55,30 @@
         config.form.fields.forEach(field => {
             let html = '';
             if (field.type === 'select') {
-                // 使用 option 的 label 作為 value，並儲存 price 和 discount 到 data 屬性
+                // Use the option's label as value, and store price and discount in data attributes
                 html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                        <select class="form-select" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>
-                            ${config[field.options].map(opt => {
-                                opt.price = opt.price || 0;
-                                opt.discount_percent = Math.max(0,Math.min(100, opt.discount_percent || 100));
-                                const savePercent = 100 - opt.discount_percent;
-                                let final_price = opt.price;
-                                if (opt.price != '聯繫報價')  final_price = (opt.price * (opt.discount_percent / 100)).toFixed(2);
-                                const price_label = opt.price == '聯繫報價' ? '聯繫報價' : (opt.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${opt.price}, 節省 ${savePercent}%)` : `HKD $${opt.price}`);
-                                return `
-                                <option value="${opt.name}" 
-                                    data-final-price="${final_price}"
-                                    data-price="${opt.price}" 
-                                    data-discount="${opt.discount_percent}"
-                                >
-                                    ${opt.name} -- ${price_label}
-                                </option>`
-                            }).join('')}
+                        <select class="form-select" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} data-price=${field['data-price'] ? 'true' : 'false'}>
+                            <option value="" disabled selected>Select a service</option>
+                            ${
+                                config[field.options].map(opt => {
+                                    opt.price = opt.price || 0;
+                                    opt.discount_percent = Math.max(0,Math.min(100, opt.discount_percent || 100));
+                                    const savePercent = 100 - opt.discount_percent;
+                                    let final_price = opt.price;
+                                    if (opt.has_price)  final_price = (opt.price * (opt.discount_percent / 100)).toFixed(2);
+                                    const price_label = !opt.has_price ? opt.price : (opt.discount_percent < 100 ? `HKD $${final_price} (Original price HKD $${opt.price}, save ${savePercent}%)` : `HKD $${opt.price}`);
+                                    return `
+                                        <option value="${opt.name}" 
+                                            data-has-price="${opt.has_price}"
+                                            data-final-price="${final_price}"
+                                            data-price="${opt.price}" 
+                                            data-discount="${opt.discount_percent}"
+                                        >
+                                            ${opt.name} -- ${price_label}
+                                        </option>
+                                        `
+                                }).join('')
+                            }
                         </select>`;
             } else if (field.type === 'textarea') {
                 html = `<label class="form-label" for="${field.name}">${field.label}</label>
@@ -111,11 +115,11 @@
     })
     .catch(err => {
         console.error('Error fetching service form data:', err);
-        container.innerHTML = '<p>無法載入服務設定，請稍後再試。</p>';
+        container.innerHTML = '<p>Unable to load service configuration, please try again later.</p>';
     })
     .then(() => {
     const hash = window.location.hash;
-    let serviceType = null; // 儲存當前是哪種服務 (e.g., 'car-inspection')
+    let serviceType = null; // Store the current service type (e.g., 'car-inspection')
     let hashash = false;
     if (hash.includes('?')) {
         const params = new URLSearchParams(hash.split('?')[1]);
@@ -127,23 +131,23 @@
         }
     }
     if (!hashash) { 
-        container.innerHTML = '<p>請從上方下拉選單選擇服務類型。</p>';
+        container.innerHTML = '<p>Please select a service type from the dropdown above.</p>';
     }
     serviceSelect.addEventListener('change', (event) => {
         serviceType = event.target.value;
         loadServiceOptions(serviceType, datas);
     });
 
-    // 電話號碼驗證邏輯 (使用正則表達式)
+    // Phone number validation logic (using regular expression)
     const telInput = document.getElementById('phone');
     if (telInput) {
         telInput.addEventListener('input', () => {
-            // 簡單檢查香港電話號碼格式: +852 開頭，後面 8 位數字
+            // Simple check for Hong Kong phone number format: starts with +852, followed by 8 digits
             const hkPhoneRegex = /^\+852\s?[4-9]\d{3}( )?\d{4}$/; 
             if (hkPhoneRegex.test(telInput.value.trim())) {
                 telInput.setCustomValidity('');
             } else {
-                telInput.setCustomValidity('無效的電話號碼。請輸入有效的香港電話號碼 (+852 xxxx xxxx), 電話號碼第一個數字必須是4至9。');
+                telInput.setCustomValidity('Invalid phone number. Please enter a valid Hong Kong phone number (+852 xxxx xxxx). The first digit of the phone number must be between 4 and 9.');
             }
             telInput.reportValidity();
         });
@@ -158,18 +162,18 @@
         const entries = Array.from(formData.entries());
         let allValid = true;
         
-        // 基本驗證
+        // Basic validation
         console.log('Starting basic validation');
         entries.forEach(([key, value]) => {
             if (!value.trim()) {
-                alert(`請填寫所有必填欄位: ${key}`);
-                allValid = false;
+            alert(`Please fill in all required fields: ${key}`);
+            allValid = false;
             }
             if (key.toLowerCase().includes('email')) {
-                // 簡單 Email 格式檢查
-                const emailRegex = /\S+@\S+\.\S+/;
-                if (!emailRegex.test(value.trim())) {
-                    alert("無效的 Email 地址。請輸入有效的 Email 地址。");
+            // Simple email format check
+            const emailRegex = /\S+@\S+\.\S+/;
+            if (!emailRegex.test(value.trim())) {
+                alert("Invalid email address. Please enter a valid email address.");
                     allValid = false;
                 }
             }
@@ -178,11 +182,11 @@
 
         console.log('Basic validation passed');
 
-        // 價格計算與確認
+        // Price calculation and confirmation
         let totalAmount = 0;
 
         console.log('Calculating price and preparing confirmation message');
-        // 找到 Select 欄位的選項，計算價格
+        // Find the selected option in the Select field and calculate price
         const serviceSelectElement = form.querySelector('select[data-price="true"]');
         
         if (serviceSelectElement) {
@@ -190,24 +194,29 @@
             const finalPrice = selectedOption.getAttribute('data-final-price');
             const price = selectedOption.getAttribute('data-price');
             const discount = selectedOption.getAttribute('data-discount');
-
-            if (finalPrice === '聯繫報價') {
-                 alert("您選擇的服務需要聯繫我們獲取報價，請等待我們的確認電話。");
-                 totalAmount = null; 
+            const hasPrice = selectedOption.getAttribute('data-has-price') == 'true';
+            console.log(`Selected service price details - Price: ${price}, Discount: ${discount}, Final Price: ${finalPrice}, Has Price: ${hasPrice}`);
+            console.log(`hasPrice value type: ${typeof hasPrice}`);
+            if (!hasPrice) {
+                 alert("The service you selected requires us to contact you for a quote. Please wait for our confirmation call.");
+                 totalAmount = price; 
             } else {
                 totalAmount = parseFloat(finalPrice);
             }
         }
+        else {
+            console.log('No price-related select element found.');
+        }
         console.log('Preparing confirmation message');
-        // 確認信息
-        let confirmationMessage = "請確認您的預約信息是否正確:\n\n";
+        // Confirmation information
+        let confirmationMessage = "Please confirm that your appointment information is correct:\n\n";
         const newEntries = entries.map(([key,value]) => [key.charAt(0).toUpperCase() + key.slice(1), value]);
         newEntries.forEach(([key, value]) => {
              confirmationMessage += `${key}: ${value}\n`;
         });
 
-        if (totalAmount > 0) {
-            confirmationMessage += `\n預計總金額: HKD $${totalAmount.toFixed(2)}`;
+        if (totalAmount > 0 && typeof totalAmount === 'number') {
+            confirmationMessage += `\nEstimated total amount: HKD $${totalAmount.toFixed(2)}`;
         }
         
         const confirmation = confirm(confirmationMessage);
@@ -215,15 +224,15 @@
             return false;
         }
 
-        // 儲存到 sessionStorage 並跳轉 (保留了原有的 sessionStorage 邏輯)
-        alert("感謝您的預約！即將跳轉到付款頁面。");
+        // Save to sessionStorage and redirect (kept the original sessionStorage logic)
+        alert("Thank you for your appointment! Redirecting to the payment page.");
         sessionStorage.clear();
         newEntries.forEach(([key, value]) => {
             sessionStorage.setItem(key, value);
         });
         
-        // 儲存最終價格，方便支付頁面使用
-        sessionStorage.setItem('FinalAmount', totalAmount == null ? '聯繫報價' : totalAmount.toFixed(2));
+        // Store the final price for use on the payment page
+        sessionStorage.setItem('FinalAmount', typeof totalAmount === 'number' ? totalAmount.toFixed(2) : totalAmount);
         const keys = newEntries.map(([key]) => key);
         keys.push('FinalAmount');
         console.log(keys.toString());

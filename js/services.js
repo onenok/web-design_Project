@@ -5,8 +5,7 @@ console.log('services page script loaded.');
 (function () {
 console.log('services page script loaded Double Check.');
 
-// Example of dynamically adding service items to the car-inspection list
-    fetch('./json/services_form.json') 
+fetch('./json/services_form.json') 
     .then(res => res.json())
     .then(data => {
         console.log('Service form data loaded:', data);
@@ -17,16 +16,24 @@ console.log('services page script loaded Double Check.');
             const title = serviceItems['service_name'] || serviceKey.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             html = `
             <div>
-                <h2><a href="#${serviceKey}">${title}</a></h2>
+                <h2 id="${serviceKey}" data-scroll-to='true'>${title}</h2>
                 <ul>
                 ${serviceItems["services"].map(item => {
                     item.price = item.price || 0;
                     item.discount_percent = Math.max(0,Math.min(100, item.discount_percent || 100));
                     const savePercent = 100 - item.discount_percent;
                     let final_price = item.price;
-                    if (item.price != '聯繫報價')  final_price = (item.price * (item.discount_percent / 100)).toFixed(2);
-                    const price_label = item.price == '聯繫報價' ? '聯繫報價' : (item.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${item.price}, 節省 ${savePercent}%)` : `HKD $${item.price}`);
-                    return`<li>${item.name} -- ${price_label}</li>`
+                    if (item.has_price)  final_price = (item.price * (item.discount_percent / 100)).toFixed(2);
+                    const price_label = item.has_price ? (item.discount_percent < 100 ? `HKD $${final_price} (Original price HKD $${item.price}, save ${savePercent}%)` : `HKD $${item.price}`) : item.price;
+                    return`
+                        <li>
+                        ${item.name}
+                        <br>
+                        ${price_label}
+                        <br>
+                        ${item.detail || ''}
+                        </li>
+                    `
                 }).join('')}
                 </ul>
                 <button onclick="location.href='#appointment?service=${serviceKey}'" aria-label="Book ${title} Service Appointment">Book ${title} Service Appointment</button>
@@ -38,6 +45,20 @@ console.log('services page script loaded Double Check.');
             section.innerHTML = html;
             services_container.appendChild(section);
         });
+        const hash = window.location.hash;
+        let serviceType = null; // Store the current service type (e.g., 'car-inspection')
+        if (hash.includes('?')) {
+            const params = new URLSearchParams(hash.split('?')[1]);
+            serviceType = params.get('scrollTo');
+            if (serviceType) {
+                const targetElement = document.getElementById(serviceType);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        }
     });
 
 })();

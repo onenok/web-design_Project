@@ -22,8 +22,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;          /* 捲軸寬度 */
-    height: 12px;         /* 水平捲軸寬度（可選） */
+    width: 12px;          /* scrollbar width */
+    height: 12px;         /* horizontal scrollbar width */
 }
 
 ::-webkit-scrollbar-track {
@@ -70,12 +70,30 @@ section {margin-top: 20px;}
 
 section h2 {font-size: 1.8em; margin-bottom: 8px;}
 
+a.betterA {
+    color: var(--text-color); 
+    text-decoration: underline;
+    text-decoration-color: var(--text-color);
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+    cursor: pointer; 
+    transition: color 0.3s ease, text-decoration-color 0.3s ease; 
+}
+
+a.betterA:hover {
+    color: color-mix(in srgb, var(--text-color) 50%, white);
+    text-decoration-color: color-mix(in srgb, var(--text-color) 50%, white);
+    text-decoration-thickness: 2px;
+}
+
+
+
 .major-container {
     overflow-x: clip;
     display: grid;
-    grid-template-rows: 4% 1fr;
+    grid-template-rows: auto 1fr;
     gap: 0px;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 nav.top-bar {
@@ -136,6 +154,11 @@ nav.top-bar {
 
         .not-enough-space-signin-up-button {
             display: none; /* hidden by default until not enough space */
+        }
+        /* Dropdown styles */
+        div.dropdown {
+            border: solid var(--nav-text-color);
+            border-width: 0px 1px;
         }
     }
 
@@ -213,7 +236,7 @@ nav.top-bar {
 
 .container {
     display: grid;
-    grid-template-rows: 1fr 70px;
+    grid-template-rows: 1fr auto;
     gap: 0px;
     color: var(--text-color);
 }
@@ -301,15 +324,14 @@ footer {
     }
 }
 
-
-/* particles.js 背景容器 */
+/* particles.js background container */
 #particles-js {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* 確保背景在內容後面 */
+    z-index: -1; /* ensure background is behind content */
 }
 
 /* ---------- Responsive ---------- */
@@ -409,11 +431,9 @@ footer {
             .dropdown-content {
                 top: 0;
                 padding: 0;
-                display: block;
+                display: none;
                 position: relative;
-                max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.5s ease;
                 border: none;
 
                 a {
@@ -428,7 +448,7 @@ footer {
         }
         .dropdown:hover .dropdown-content {
             border: 1px solid var(--nav-text-color);
-            max-height: 100%;
+            display: block;
         }
     }
     .main-content > div[class$="-page"] {
@@ -457,7 +477,7 @@ footer {
     .aWeirdThing { display: none !important;}
 
     /* disable heavy background on mobile */
-    #particles-js { display: none; }
+    #particles-js { display: none; width: 0; height: 0; }
 
     img { max-width: 100%; height: auto; display: block; }
 

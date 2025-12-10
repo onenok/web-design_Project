@@ -30,10 +30,9 @@
         margin-top: 10px;
         margin-left: auto;
         margin-right: auto;
-        padding: 0 5px;
-        border: #232323 2px solid;
+        padding: 10px;
         border-radius: 10px;
-        background-color: #232323;
+        background-color: rgba(0,0,0,0.75);
         color: #DDDD00;
         text-align: center;
         width: fit-content;
@@ -41,22 +40,37 @@
 </style>
 <div class="home-page">
     <h1>Welcome to Car Comprehensive Services Ltd.</h1>
-    <p>Professional automotive service provider offering comprehensive car care solutions.</p>
+    <p>Professional car service provider offering comprehensive car care solutions.</p>
     <div class="portal-cta">
-        <a class="portal-button" href="#appointment" aria-label="Go to appointment page">立即預約 / Book Appointment</a>
+        <a class="portal-button" href="#appointment" aria-label="Go to appointment page">Book Appointment</a>
     </div>
     <section>
-        <h2>Our <a href="#services">Services</a></h2>
-        <ul>
-            <li><a href="#car-inspection">Car Inspection</a></li>
-            <li><a href="#car-repair">Car Repair and Maintenance</a></li>
-            <li><a href="#car-wash">Professional Car Wash Services</a></li>
-            <li><a href="#parts-sales">Car Parts Sales</a></li>
-        </ul>
-        <h3 id="Emergency">Emergency 拖車服務熱線: +852 9487 7414</h3>
+        <h2><a class="betterA" href="#services">Our Services</a></h2>
+        <ul id="service_list"></ul>
+        <h3 id="Emergency">Emergency Towing Service Hotline: +852 9487 7414</h3>
     </section>
     <section>
         <h2>Why Choose Us?</h2>
         <p>We have an experienced technical team and use the most advanced equipment to provide the best service for your car. For more information, please visit <a href="#about">About Us</a>.</p>
     </section>
 </div>
+<script>
+    fetch('./json/services_form.json') 
+    .then(res => res.json())
+    .then(data => {
+        console.log('Service form data loaded:', data);
+        const service_list = document.querySelector('#service_list');
+        const allServicesKeys = Object.keys(data);
+        let html = '';
+        allServicesKeys.forEach(serviceKey => {
+            html = `
+                <a class="betterA" href="#services?scrollTo=${serviceKey}">
+                    ${data[serviceKey]['service_name'] || serviceKey}
+                </a>
+            `;
+            const li = document.createElement('li');
+            li.innerHTML = html;
+            service_list.appendChild(li);
+        });
+    });
+</script>
