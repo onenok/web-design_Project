@@ -6,85 +6,126 @@ console.log('appointment page script loaded.');
 console.log('appointment page script loaded Double Check.');
 
 console.log('Appointment page script loaded');
+    const container = document.getElementById('form-fields');
+    const serviceSelect = document.getElementById('service-type');
+
+    function loadServiceOptions(serviceType, datas) {
+        const config = datas[serviceType];
+        if (!config) {
+            container.innerHTML = '<p>找不到對應的服務設定。</p>';
+            return;
+        }
+
+        // Set title
+        document.getElementById('form-title').textContent = config.title;
+
+        // Dynamically generate fields
+        container.innerHTML = '';
+        config.form.fields.forEach(field => {
+            let html = '';
+            if (field.type === 'select') {
+                // 使用 option 的 label 作為 value，並儲存 price 和 discount 到 data 屬性
+                html = `<label class="form-label" for="${field.name}">${field.label}</label>
+                        <select class="form-select" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>
+                            ${config[field.options].map(opt => {
+                                opt.price = opt.price || 0;
+                                opt.discount_percent = Math.max(0,Math.min(100, opt.discount_percent || 100));
+                                const savePercent = 100 - opt.discount_percent;
+                                let final_price = opt.price;
+                                if (opt.price != '聯繫報價')  final_price = (opt.price * (opt.discount_percent / 100)).toFixed(2);
+                                const price_label = opt.price == '聯繫報價' ? '聯繫報價' : (opt.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${opt.price}, 節省 ${savePercent}%)` : `HKD $${opt.price}`);
+                                return `
+                                <option value="${opt.name}" 
+                                    data-final-price="${final_price}"
+                                    data-price="${opt.price}" 
+                                    data-discount="${opt.discount_percent}"
+                                >
+                                    ${opt.name} -- ${price_label}
+                                </option>`
+                            }).join('')}
+                        </select>`;
+            } else if (field.type === 'textarea') {
+                html = `<label class="form-label" for="${field.name}">${field.label}</label>
+                        <textarea class="form-textarea" cols="${field.cols || ''}" rows="${field.rows || ''}" placeholder="${field.placeholder}" id="${field.name}" name="${field.name}"></textarea>`;
+            } else {
+                html = `<label class="form-label" for="${field.name}">${field.label}</label>
+                        <input type="${field.type}" placeholder="${field.placeholder}" class="form-input" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} min="${field.min || ''}">`;
+            }
+            const div = document.createElement('div');
+            div.className = 'form-input-group';
+            div.innerHTML = html;
+            container.appendChild(div);
+        });
+    }
+
+    let datas = null
+    fetch('./json/services_form.json') 
+    .then(res => res.json())
+    .then(data => {
+        datas = data;
+        console.log('Service form data loaded:', data);
+        const allKeys = Object.keys(data);
+        serviceSelect.innerHTML = `
+            <option value="" disabled selected>Select a service</option>
+        `;
+
+        allKeys.forEach(service => {
+            const option = document.createElement('option');
+            option.value = service;
+            option.textContent = service.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            serviceSelect.appendChild(option);
+        });
+        serviceSelect.disabled = false;
+    })
+    .catch(err => {
+        console.error('Error fetching service form data:', err);
+        container.innerHTML = '<p>無法載入服務設定，請稍後再試。</p>';
+    })
+    .then(() => {
     const hash = window.location.hash;
     let serviceType = null; // 儲存當前是哪種服務 (e.g., 'car-inspection')
-
+    let hashash = false;
     if (hash.includes('?')) {
         const params = new URLSearchParams(hash.split('?')[1]);
         serviceType = params.get('service');
+        if (serviceType) {
+            loadServiceOptions(serviceType, datas);
+            serviceSelect.value = serviceType;
+            hashash = true;
+        }
+    }
+    if (!hashash) { 
+        container.innerHTML = '<p>請從上方下拉選單選擇服務類型。</p>';
+    }
+    serviceSelect.addEventListener('change', (event) => {
+        serviceType = event.target.value;
+        loadServiceOptions(serviceType, datas);
+    });
+
+    // 電話號碼驗證邏輯 (使用正則表達式)
+    const telInput = document.getElementById('phone');
+    if (telInput) {
+        telInput.addEventListener('input', () => {
+            // 簡單檢查香港電話號碼格式: +852 開頭，後面 8 位數字
+            const hkPhoneRegex = /^\+852\s?[4-9]\d{3}( )?\d{4}$/; 
+            if (hkPhoneRegex.test(telInput.value.trim())) {
+                telInput.setCustomValidity('');
+            } else {
+                telInput.setCustomValidity('無效的電話號碼。請輸入有效的香港電話號碼 (+852 xxxx xxxx), 電話號碼第一個數字必須是4至9。');
+            }
+            telInput.reportValidity();
+        });
     }
 
-    if (serviceType) {
-        // 假設 services_form.json 檔案路徑正確
-        fetch('./json/services_form.json') 
-            .then(res => res.json())
-            .then(data => {
-                const config = data[serviceType];
-                if (!config) {
-                    document.getElementById('form-fields').innerHTML = '<p>找不到對應的服務設定。</p>';
-                    return;
-                }
+    });
 
-                // Set title
-                document.getElementById('form-title').textContent = config.title;
+})();
+console.log('appointment page script loaded.');
 
-                // Dynamically generate fields
-                const container = document.getElementById('form-fields');
-                container.innerHTML = '';
-                config.fields.forEach(field => {
-                    let html = '';
-                    if (field.type === 'select') {
-                        // 使用 option 的 label 作為 value，並儲存 price 和 discount 到 data 屬性
-                        html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                                <select class="form-select" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''}>
-                                    ${field.options.map(opt => {
-                                        opt.price = opt.price || 0;
-                                        opt.discount_percent = Math.max(0,Math.min(100, opt.discount_percent || 100));
-                                        const savePercent = 100 - opt.discount_percent;
-                                        let final_price = opt.price;
-                                        if (opt.price != '聯繫報價')  final_price = (opt.price * (opt.discount_percent / 100)).toFixed(2);
-                                        const price_label = opt.price == '聯繫報價' ? '聯繫報價' : (opt.discount_percent < 100 ? `HKD $${final_price} (原價 HKD $${opt.price}, 節省 ${savePercent}%)` : `HKD $${opt.price}`);
-                                        return `<option value="${opt.label}" 
-                                                data-final-price="${final_price}"
-                                                data-price="${opt.price}" 
-                                                data-discount="${opt.discount_percent}">
-                                            ${opt.label} -- ${price_label}
-                                        </option>`
-                                    }).join('')}
-                                </select>`;
-                    } else if (field.type === 'textarea') {
-                        html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                                <textarea class="form-textarea" cols="${field.cols || ''}" rows="${field.rows || ''}" placeholder="${field.placeholder}" id="${field.name}" name="${field.name}"></textarea>`;
-                    } else {
-                        html = `<label class="form-label" for="${field.name}">${field.label}</label>
-                                <input type="${field.type}" placeholder="${field.placeholder}" class="form-input" id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} min="${field.min || ''}">`;
-                    }
-                    const div = document.createElement('div');
-                    div.className = 'form-input-group';
-                    div.innerHTML = html;
-                    container.appendChild(div);
-                });
+(function () {
+console.log('appointment page script loaded Double Check.');
 
-                // 電話號碼驗證邏輯 (使用簡單正則表達式替代 validator.js)
-                const telInput = document.getElementById('phone');
-                if (telInput) {
-                    telInput.addEventListener('input', () => {
-                        // 簡單檢查香港電話號碼格式: +852 開頭，後面 8 位數字
-                        const hkPhoneRegex = /^\+852\s?[4-9]\d{3}( )?\d{4}$/; 
-                        if (hkPhoneRegex.test(telInput.value.trim())) {
-                            telInput.setCustomValidity('');
-                        } else {
-                            telInput.setCustomValidity('無效的電話號碼。請輸入有效的香港電話號碼 (+852 xxxx xxxx)。');
-                        }
-                        telInput.reportValidity();
-                    });
-                }
-            });
-        
-    }
-
-
-    function doubleCheckAndSave(form) {
+function doubleCheckAndSave(form) {
         console.log('Form submission triggered');
         const formData = new FormData(form);
         const entries = Array.from(formData.entries());
@@ -164,7 +205,7 @@ console.log('Appointment page script loaded');
         window.location.hash = "#payment";
         return false; 
     }
-
+    // Sart script execution
     const appointmentForm = document.getElementById('appointment-form');
     appointmentForm.addEventListener('submit', (event) => {
         event.preventDefault(); // Prevent form submission if validation fails

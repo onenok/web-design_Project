@@ -1,36 +1,11 @@
-<!--This is not a independent page-->
-<!--It will be add in to a <div> element-->
-<!--no need to start with <!DOCTYPE html> <html> <head> <body> tags-->
-<style>
-    .services-page {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        height: 100%;
-    }
-    section.services-section {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        justify-content: space-around;
+// Extracted scripts from services.html
 
-        img.service-image {
-            max-width: 50%;
-            height: auto;
-            border: 1px solid var(--nav-text-color);
-        }
-    }
-</style>
-<div class="services-page">
-    <h1>Our Services</h1>
-    <p>Car Comprehensive Services Ltd. provides comprehensive car care services.</p>
-    <section>
-        <h2>Main Service Items</h2>
-        <div id="services_container"></div>
-    </section>
-</div>
-<script>
-    // Example of dynamically adding service items to the car-inspection list
+console.log('services page script loaded.');
+
+(function () {
+console.log('services page script loaded Double Check.');
+
+// Example of dynamically adding service items to the car-inspection list
     fetch('./json/services_form.json') 
     .then(res => res.json())
     .then(data => {
@@ -64,4 +39,5 @@
             services_container.appendChild(section);
         });
     });
-</script>
+
+})();

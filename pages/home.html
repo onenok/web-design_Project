@@ -8,18 +8,52 @@
         padding: 20px;
         height: 100%;
     }
+    .portal-cta {
+        display: flex;
+        justify-content: center;
+        margin: 18px 0;
+    }
+    .portal-button {
+        background: var(--nav-background-color, #232323);
+        color: var(--nav-text-color, #dddddd);
+        padding: 14px 22px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+    .portal-button:focus,
+    .portal-button:hover {
+        opacity: 0.92;
+    }   
+    #Emergency {
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 5px;
+        border: #232323 2px solid;
+        border-radius: 10px;
+        background-color: #232323;
+        color: #DDDD00;
+        text-align: center;
+        width: fit-content;
+    }
 </style>
 <div class="home-page">
     <h1>Welcome to Car Comprehensive Services Ltd.</h1>
-    <p>Professional automotive service provider offering comprehensive vehicle care solutions.</p>
+    <p>Professional automotive service provider offering comprehensive car care solutions.</p>
+    <div class="portal-cta">
+        <a class="portal-button" href="#appointment" aria-label="Go to appointment page">立即預約 / Book Appointment</a>
+    </div>
     <section>
-        <h2>Our Services</h2>
+        <h2>Our <a href="#services">Services</a></h2>
         <ul>
-            <li>Car Repair and Maintenance</li>
-            <li>Professional Car Wash Services</li>
-            <li>Car Parts Sales</li>
-            <li>Vehicle Inspection and Diagnostics</li>
+            <li><a href="#car-inspection">Car Inspection</a></li>
+            <li><a href="#car-repair">Car Repair and Maintenance</a></li>
+            <li><a href="#car-wash">Professional Car Wash Services</a></li>
+            <li><a href="#parts-sales">Car Parts Sales</a></li>
         </ul>
+        <h3 id="Emergency">Emergency 拖車服務熱線: +852 9487 7414</h3>
     </section>
     <section>
         <h2>Why Choose Us?</h2>

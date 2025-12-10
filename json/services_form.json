@@ -1,83 +1,305 @@
 {
   "car-inspection": {
-    "title": "車輛檢查預約與線上報價",
-    "fields": [
-      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
-      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
-      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+    "service_name": "Car Inspection",
+    "services": [
       {
-        "label": "檢查類型",
-        "type": "select",
-        "name": "inspection_type",
-        "data-price": true,
-        "options": [
-          { "label": "全車綜合檢查 (100+項目)", "price": 1000, "discount_percent": 90 },
-          { "label": "引擎電腦診斷 (OBD-II)", "price": 700, "discount_percent": 85 },
-          { "label": "煞車系統安全檢查", "price": 450, "discount_percent": 100 },
-          { "label": "廢氣排放測試", "price": 300, "discount_percent": 100 }
-        ],
-        "required": true
+        "name": "全車綜合檢查 (100+項目)",
+        "price": 1000,
+        "discount_percent": 90,
+        "detail": "包括引擎、傳動系統、煞車、懸吊、電氣系統等全面檢查"
       },
-      { "label": "預約日期", "type": "date", "name": "date", "required": true },
-      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "描述任何特定的疑慮或問題" }
-    ]
+      {
+        "name": "引擎電腦診斷 (OBD-II)",
+        "price": 700,
+        "discount_percent": 85,
+        "detail": "使用專業診斷工具檢測引擎故障碼及性能"
+      },
+      {
+        "name": "煞車系統安全檢查",
+        "price": 450,
+        "discount_percent": 100,
+        "detail": "檢查煞車片、碟盤、液位及整體性能"
+      },
+      {
+        "name": "廢氣排放測試",
+        "price": 300,
+        "discount_percent": 100,
+        "detail": "確保車輛符合環保標準"
+      }
+    ],
+    "form": {
+      "title": "車輛檢查預約與線上報價",
+      "fields": [
+        {
+          "label": "姓名",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "placeholder": "輸入您的姓名"
+        },
+        {
+          "label": "聯絡電話 (香港, 需'+852')",
+          "type": "tel",
+          "name": "phone",
+          "required": true,
+          "placeholder": "e.g. +852 6789 1234"
+        },
+        {
+          "label": "電子郵件",
+          "type": "email",
+          "name": "email",
+          "required": true,
+          "placeholder": "輸入您的 Email"
+        },
+        {
+          "label": "檢查類型",
+          "type": "select",
+          "name": "inspection_type",
+          "data-price": true,
+          "options": "services",
+          "required": true
+        },
+        {
+          "label": "預約日期",
+          "type": "date",
+          "name": "date",
+          "required": true
+        },
+        {
+          "label": "備註",
+          "type": "textarea",
+          "name": "note",
+          "placeholder": "描述任何特定的疑慮或問題"
+        }
+      ]
+    }
   },
   "car-repair": {
-    "title": "汽車維修預約與線上報價",
-    "fields": [
-      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
-      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
-      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+    "service_name": "Car Repair & Maintenance",
+    "services": [
       {
-        "label": "維修/保養類型",
-        "type": "select",
-        "name": "repair_type",
-        "data-price": true,
-        "options": [
-          { "label": "定期小保養 (A Plan)", "price": 800, "discount_percent": 90 },
-          { "label": "定期大保養 (B Plan)", "price": 1800, "discount_percent": 85 },
-          { "label": "引擎調校/維修", "price": "聯繫報價", "discount_percent": 100 },
-          { "label": "懸吊系統維修", "price": "聯繫報價", "discount_percent": 100 },
-          { "label": "煞車系統維修", "price": "聯繫報價", "discount_percent": 100 }
-        ],
-        "required": true
+        "name": "定期小保養 (A Plan)",
+        "price": 800,
+        "discount_percent": 90,
+        "detail": "更換機油、機油濾清器，檢查主要系統"
       },
-      { "label": "預約日期", "type": "date", "name": "date", "required": true },
-      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "描述具體問題或所需服務" }
-    ]
+      {
+        "name": "定期大保養 (B Plan)",
+        "price": 1800,
+        "discount_percent": 85,
+        "detail": "包括小保養內容，另更換空氣濾清器、火花塞等"
+      },
+      {
+        "name": "引擎調校/維修",
+        "price": "聯繫報價",
+        "discount_percent": 100,
+        "detail": "專業引擎維修與調校服務"
+      },
+      {
+        "name": "懸吊系統維修",
+        "price": "聯繫報價",
+        "discount_percent": 100,
+        "detail": "檢查與更換避震器、彈簧等懸吊部件"
+      },
+      {
+        "name": "煞車系統維修",
+        "price": "聯繫報價",
+        "discount_percent": 100,
+        "detail": "更換煞車片、碟盤及相關維修"
+      }
+    ],
+    "form": {
+      "title": "汽車維修預約與線上報價",
+      "fields": [
+        {
+          "label": "姓名",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "placeholder": "輸入您的姓名"
+        },
+        {
+          "label": "聯絡電話 (香港, 需'+852')",
+          "type": "tel",
+          "name": "phone",
+          "required": true,
+          "placeholder": "e.g. +852 6789 1234"
+        },
+        {
+          "label": "電子郵件",
+          "type": "email",
+          "name": "email",
+          "required": true,
+          "placeholder": "輸入您的 Email"
+        },
+        {
+          "label": "維修/保養類型",
+          "type": "select",
+          "name": "repair_type",
+          "data-price": true,
+          "options": "services",
+          "required": true
+        },
+        {
+          "label": "預約日期",
+          "type": "date",
+          "name": "date",
+          "required": true
+        },
+        {
+          "label": "備註",
+          "type": "textarea",
+          "name": "note",
+          "placeholder": "描述具體問題或所需服務"
+        }
+      ]
+    }
   },
   "car-wash": {
-    "title": "汽車美容與護理預約",
-    "fields": [
-      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
-      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
-      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
+    "service_name": "Car Wash & Detailing",
+    "services": [
       {
-        "label": "服務項目",
-        "type": "select",
-        "name": "wash_type",
-        "data-price": true,
-        "options": [
-          { "label": "標準內外清潔 (Basic Wash)", "price": 180, "discount_percent": 100 },
-          { "label": "深度清潔與消毒 (Deep Clean)", "price": 450, "discount_percent": 90 },
-          { "label": "專業打蠟護理 (Wax Care)", "price": 600, "discount_percent": 80 },
-          { "label": "內裝精緻護理 (Interior Detail)", "price": 500, "discount_percent": 90 }
-        ],
-        "required": true
+        "name": "標準內外清潔 (Basic Wash)",
+        "price": 180,
+        "discount_percent": 100,
+        "detail": "包括外部洗車與內部吸塵"
       },
-      { "label": "預約日期", "type": "date", "name": "date", "required": true },
-      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "任何特殊要求或指示" }
-    ]
+      {
+        "name": "深度清潔與消毒 (Deep Clean)",
+        "price": 450,
+        "discount_percent": 90,
+        "detail": "全面內外清潔，包含座椅、地毯消毒"
+      },
+      {
+        "name": "專業打蠟護理 (Wax Care)",
+        "price": 600,
+        "discount_percent": 80,
+        "detail": "高品質打蠟，保護車漆並提升光澤"
+      },
+      {
+        "name": "內裝精緻護理 (Interior Detail)",
+        "price": 500,
+        "discount_percent": 90,
+        "detail": "深層清潔與護理內裝，包括儀表板與皮革護理"
+      }
+    ],
+    "form": {
+      "title": "汽車美容與護理預約",
+      "fields": [
+        {
+          "label": "姓名",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "placeholder": "輸入您的姓名"
+        },
+        {
+          "label": "聯絡電話 (香港, 需'+852')",
+          "type": "tel",
+          "name": "phone",
+          "required": true,
+          "placeholder": "e.g. +852 6789 1234"
+        },
+        {
+          "label": "電子郵件",
+          "type": "email",
+          "name": "email",
+          "required": true,
+          "placeholder": "輸入您的 Email"
+        },
+        {
+          "label": "服務項目",
+          "type": "select",
+          "name": "wash_type",
+          "data-price": true,
+          "options": "services",
+          "required": true
+        },
+        {
+          "label": "預約日期",
+          "type": "date",
+          "name": "date",
+          "required": true
+        },
+        {
+          "label": "備註",
+          "type": "textarea",
+          "name": "note",
+          "placeholder": "任何特殊要求或指示"
+        }
+      ]
+    }
   },
   "parts-sales": {
-    "title": "汽車零件訂購與查詢",
-    "fields": [
-      { "label": "姓名", "type": "text", "name": "name", "required": true, "placeholder": "輸入您的姓名" },
-      { "label": "聯絡電話 (香港, 需'+852')", "type": "tel", "name": "phone", "required": true, "placeholder": "e.g. +852 6789 1234" },
-      { "label": "電子郵件", "type": "email", "name": "email", "required": true, "placeholder": "輸入您的 Email" },
-      { "label": "零件名稱 (以逗號分隔)", "type": "text", "name": "part_names-list", "required": true, "placeholder": "e.g. 煞車皮, 空氣濾芯" },
-      { "label": "數量", "type": "number", "name": "quantity", "required": true, "min": 1, "placeholder": "輸入所需數量" },
-      { "label": "備註", "type": "textarea", "name": "note", "placeholder": "指定特定品牌、型號或規格" }
-    ]
+    "service_name": "Car Parts Sales & Inquiry",
+    "services": [
+      {
+        "name": "零件訂購與查詢",
+        "price": "聯繫報價",
+        "discount_percent": 100,
+        "detail": "提供各類汽車零件的訂購與查詢服務"
+      },
+      {
+        "name": "零件安裝服務",
+        "price": "聯繫報價",
+        "discount_percent": 100,
+        "detail": "專業安裝所購買的汽車零件"
+      }
+    ],
+    "form": {
+      "title": "汽車零件訂購與查詢",
+      "fields": [
+        {
+          "label": "姓名",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "placeholder": "輸入您的姓名"
+        },
+        {
+          "label": "聯絡電話 (香港, 需'+852')",
+          "type": "tel",
+          "name": "phone",
+          "required": true,
+          "placeholder": "e.g. +852 6789 1234"
+        },
+        {
+          "label": "電子郵件",
+          "type": "email",
+          "name": "email",
+          "required": true,
+          "placeholder": "輸入您的 Email"
+        },
+        {
+          "label": "零件名稱 (以逗號分隔)",
+          "type": "text",
+          "name": "part_names-list",
+          "required": true,
+          "placeholder": "e.g. 煞車皮, 空氣濾芯"
+        },
+        {
+          "label": "服務項目",
+          "type": "select",
+          "name": "parts_sales_type",
+          "data-price": true,
+          "options": "services",
+          "required": true
+        },
+        {
+          "label": "數量",
+          "type": "number",
+          "name": "quantity",
+          "required": true,
+          "min": 1,
+          "placeholder": "輸入所需數量"
+        },
+        {
+          "label": "備註",
+          "type": "textarea",
+          "name": "note",
+          "placeholder": "指定特定品牌、型號或規格"
+        }
+      ]
+    }
   }
 }
