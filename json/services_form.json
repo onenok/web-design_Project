@@ -7,6 +7,7 @@
         "price": 1000,
         "has_price": true,
         "discount_percent": 90,
+        "ExpectedDaysOfService": 1,
         "detail": "Includes comprehensive checks of the engine, transmission, brakes, suspension, electrical systems, and more"
       },
       {
@@ -14,6 +15,7 @@
         "price": 700,
         "has_price": true,
         "discount_percent": 85,
+        "ExpectedDaysOfService": 1,
         "detail": "Using professional diagnostic tools to detect engine fault codes and performance"
       },
       {
@@ -21,6 +23,7 @@
         "price": 450,
         "has_price": true,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 1,
         "detail": "Check brake pads, discs, fluid levels, and overall performance"
       },
       {
@@ -28,6 +31,7 @@
         "price": 300,
         "has_price": true,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 1,
         "detail": "Ensure the vehicle meets environmental standards"
       }
     ],
@@ -86,6 +90,7 @@
         "price": 800,
         "has_price": true,
         "discount_percent": 90,
+        "ExpectedDaysOfService": 1,
         "detail": "Change engine oil, oil filter, and check major systems"
       },
       {
@@ -93,6 +98,7 @@
         "price": 1800,
         "has_price": true,
         "discount_percent": 85,
+        "ExpectedDaysOfService": 1,
         "detail": "Includes all minor maintenance items plus replacement of air filter, spark plugs, etc."
       },
       {
@@ -100,6 +106,7 @@
         "price": "Contact for Quote",
         "has_price": false,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 3,
         "detail": "Professional engine tuning and repair services"
       },
       {
@@ -107,6 +114,7 @@
         "price": "Contact for Quote",
         "has_price": false,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 2,
         "detail": "Check and replace shock absorbers, springs, and other suspension components"
       },
       {
@@ -114,6 +122,7 @@
         "price": "Contact for Quote",
         "has_price": false,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 2,
         "detail": "Replace brake pads, discs, and related repairs"
       }
     ],
@@ -172,6 +181,7 @@
         "price": 180,
         "has_price": true,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 1,
         "detail": "Includes exterior car wash and interior vacuuming"
       },
       {
@@ -179,6 +189,7 @@
         "price": 450,
         "has_price": true,
         "discount_percent": 90,
+        "ExpectedDaysOfService": 1,
         "detail": "Comprehensive interior and exterior cleaning, including seat and carpet disinfection"
       },
       {
@@ -186,6 +197,7 @@
         "price": 600,
         "has_price": true,
         "discount_percent": 80,
+        "ExpectedDaysOfService": 1,
         "detail": "High-quality waxing to protect paint and enhance shine"
       },
       {
@@ -193,6 +205,7 @@
         "price": 500,
         "has_price": true,
         "discount_percent": 90,
+        "ExpectedDaysOfService": 1,
         "detail": "Deep cleaning and care for the interior, including dashboard and leather treatment"
       }
     ],
@@ -251,6 +264,7 @@
         "price": "Contact for Quote",
         "has_price": false,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 1,
         "detail": "Providing ordering and inquiry services for various car parts"
       },
       {
@@ -258,6 +272,7 @@
         "price": "Contact for Quote",
         "has_price": false,
         "discount_percent": 100,
+        "ExpectedDaysOfService": 2,
         "detail": "Professional installation of purchased car parts"
       }
     ],
