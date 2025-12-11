@@ -10,8 +10,9 @@ fetch('./json/services_form.json')
     .then(data => {
         console.log('Service form data loaded:', data);
         const service_list = document.querySelector('#service_list');
-        service_list.innerHTML = ''; // Clear the loading message
+        service_list.innerHTML = 'loading...'; // loading message
         const allServicesKeys = Object.keys(data);
+        service_list.innerHTML = ''; // clear loading message
         let html = '';
         allServicesKeys.forEach(serviceKey => {
             html = `

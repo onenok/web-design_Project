@@ -56,6 +56,12 @@ fetch('./json/services_form.json')
                 if (targetElement) {
                     setTimeout(() => {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                            goodAlert(
+                            `Smooth scrolling animation is currently disabled.
+                            This is due to 'Reduce motion' being active in your operating system settings.`
+                        );
+                        }
                     }, 100);
                 }
             }

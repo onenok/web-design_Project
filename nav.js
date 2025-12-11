@@ -105,14 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', checkForOverflow);
   checkForOverflow();
 
-  // Setup overflow menu toggle
-  navButton.addEventListener('click', () => {
-    if (navButton.classList.contains('open')) {
-      navToggle.setAttribute('aria-expanded', 'false');
-      navButton.classList.remove('open');
-      document.body.classList.remove('nav-open');
-    }
-  });
+  // Toggle menu
   navToggle.addEventListener('click', () => {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
@@ -122,10 +115,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (!overflowList.classList.contains('show')) return;
-    if (e.target === navToggle) return;
-    if (overflowList.contains(e.target)) return;
-    
-    overflowList.classList.remove('show');
+    //goodAlert("clicked");
+    if (!navButton.classList.contains('open')) {
+      //goodAlert("navButton not showing");
+      return
+    };
+    if (e.target === navToggle) {
+      //goodAlert("clicked on navToggle");
+      return
+    };
+    if (e.target === navButton) {
+      //goodAlert("clicked on navButton");
+      return
+    };
+    //goodAlert(`clicked on ${e.target}`)
+    navToggle.setAttribute('aria-expanded', 'false');
+    navButton.classList.remove('open');
+    document.body.classList.remove('nav-open');
   });
 });
