@@ -32,6 +32,7 @@ fetch('./json/services_form.json')
                         <br>
                         ${price_label}
                         <br>
+                        ${item.ExpectedDaysOfService ? `Expected Days of Service: ${item.ExpectedDaysOfService}<br>` : ''}
                         ${item.detail || ''}
                         </li>
                     `
