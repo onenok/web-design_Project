@@ -47,7 +47,7 @@
             html = `
             <div>
                 <h2 id="${serviceKey}" data-scroll-to='true'>${title}</h2>
-                <ul>
+                <setion style="display: grid; gap: 10px;">
                 ${serviceItems["services"].map(item => {
                     item.price = item.price || 0;
                     item.discount_percent = Math.max(0,Math.min(100, item.discount_percent || 100));
@@ -56,17 +56,17 @@
                     if (item.has_price)  final_price = (item.price * (item.discount_percent / 100)).toFixed(2);
                     const price_label = item.has_price ? (item.discount_percent < 100 ? `HKD $${final_price} (Original price HKD $${item.price}, save ${savePercent}%)` : `HKD $${item.price}`) : item.price;
                     return`
-                        <li>
-                        ${item.name}
-                        <br>
-                        ${price_label}
-                        <br>
-                        ${item.ExpectedDaysOfService ? `Expected Days of Service: ${item.ExpectedDaysOfService}<br>` : ''}
-                        ${item.detail || ''}
-                        </li>
+                        <div style="border-radius: 10px; background-color: rgba(255, 255, 255, 0.5); padding: 10px; display: grid; gap: 5px;">
+                        <h3>${item.name}</h3>
+                        <table>
+                        <tr><td>Price:</td><td>${price_label}</td></tr>
+                        <tr><td>Expected Days of Service:</td><td>${item.ExpectedDaysOfService}</td></tr>
+                        <tr><td>Service Detail:</td><td>${item.detail}</td></tr>
+                        </table>
+                        </div>
                     `
                 }).join('')}
-                </ul>
+                </setion>
                 <button onclick="location.href='#appointment?service=${serviceKey}'" aria-label="Book ${title} Service Appointment">Book ${title} Service Appointment</button>
             </div>
             <img src="./img/${serviceKey.replace(/-/g, '_')}.jpeg" alt="${title} Image" class="service-image">
