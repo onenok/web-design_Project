@@ -18,7 +18,7 @@ fetch('./json/services_form.json')
             html = `
             <div>
                 <h2 id="${serviceKey}" data-scroll-to='true'>${title}</h2>
-                <setion style="display: grid; gap: 10px;">
+                <section style="display: grid; gap: 10px;">
                 ${serviceItems["services"].map(item => {
                     item.price = item.price || 0;
                     item.discount_percent = Math.max(0,Math.min(100, item.discount_percent || 100));
@@ -37,7 +37,7 @@ fetch('./json/services_form.json')
                         </div>
                     `
                 }).join('')}
-                </setion>
+                </section>
                 <button onclick="location.href='#appointment?service=${serviceKey}'" aria-label="Book ${title} Service Appointment">Book ${title} Service Appointment</button>
             </div>
             <img src="./img/${serviceKey.replace(/-/g, '_')}.jpeg" alt="${title} Image" class="service-image">
