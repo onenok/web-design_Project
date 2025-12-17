@@ -3,7 +3,7 @@
     "service_name": "Car Inspection",
     "services": [
       {
-        "name": "Full Vehicle Comprehensive Inspection (100+ items)",
+        "name": "Full Car Comprehensive Inspection (100+ items)",
         "price": 1000,
         "has_price": true,
         "discount_percent": 90,
@@ -12,7 +12,7 @@
       },
       {
         "name": "Engine Computer Diagnostics (OBD-II)",
-        "price": 700,
+        "price": 300,
         "has_price": true,
         "discount_percent": 85,
         "ExpectedDaysOfService": 1,
@@ -32,7 +32,7 @@
         "has_price": true,
         "discount_percent": 100,
         "ExpectedDaysOfService": 1,
-        "detail": "Ensure the vehicle meets environmental standards"
+        "detail": "Ensure the Car meets environmental standards"
       }
     ],
     "form": {
@@ -95,7 +95,7 @@
       },
       {
         "name": "Regular Major Maintenance (B Plan)",
-        "price": 1800,
+        "price": 2100,
         "has_price": true,
         "discount_percent": 85,
         "ExpectedDaysOfService": 1,

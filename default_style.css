@@ -398,6 +398,10 @@ footer {
                 border: none;
                 box-sizing: border-box;
             }
+            div.dropdown .dropdown-content {
+                border: 1px solid var(--nav-text-color);
+                display: block;
+            }   
         }
 
         /* When open, slide in */
@@ -452,10 +456,7 @@ footer {
                 }
             }
         }
-        .dropdown:hover .dropdown-content {
-            border: 1px solid var(--nav-text-color);
-            display: block;
-        }
+        
     }
     .main-content > div[class$="-page"] {
         margin-left: 12px;
