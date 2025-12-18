@@ -25,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="./default_style.css">
     <link rel="stylesheet" type="text/css" href="./form_default.css" data-scope=".usingFormDefaultStyle">
     <script src="./switch.js" defer></script>
+    <script src="./nav.js" defer></script>
+    <script src="./goodAlert.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/validator@13.15.23/validator.min.js" defer></script>
     <script src="./particlebg.js" defer></script>
@@ -37,20 +39,17 @@
             <a href="./" class="nav-logo">
                 <span>C.C.S.</span>
             </a>
-            <div class="nav-button">
+            <div class="nav-button" id="navMenu">
                 <div>
                     <a href="#home">Home</a>
                 </div>
-                <div>
-                    <div class="dropdown">
-                        <a href="#services" class="dropbtn">Services</a>
-                        <div class="dropdown-content">
-                            <a href="#car-inspection">Car Inspection</a>
-                            <a href="#car-repair">Car Repair</a>
-                            <a href="#car-wash">Car Wash</a>
-                            <a href="#parts-sales">Parts Sales</a>
-                        </div>
-                    </div>
+                <div class="dropdown">
+                    <a class="dropbtn" href="#services">Services</a>
+                    <div class="dropdown-content" id="nav-services-list">If you see this, please wait or refresh the page.</div>
+                </div>
+                <div class="dropdown">
+                    <a class="dropbtn" href="#appointment">Appointment</a>
+                    <div class="dropdown-content" id="nav-appointment-list">If you see this, please wait or refresh the page.</div>
                 </div>
                 <div>
                     <a href="#about">About Us</a>
@@ -88,7 +87,9 @@
         <div class="container">
             <div id="particles-js"></div>
             <div class="main-content" id="main-content">
-                <p>Loading...</p>
+                <div class="Loading-page">
+                    <h1 style="text-align:center; width: 100%; margin: auto; position: relative;">Loading...</h1>
+                </div>
             </div>
             <footer class="footer">
                 <p>&copy; 2025 Car Comprehensive Services Ltd. (C.C.S. Ltd.) all rights reserved.</p>
@@ -102,3 +103,28 @@
     </div>
 </body>
 </html>
+<script>
+    fetch('./json/services_form.json') 
+    .then(res => res.json())
+    .then(data => {
+        console.log('Service form data loaded:', data);
+        const service_list = document.querySelector('#nav-services-list');
+        const appointment_list = document.querySelector('#nav-appointment-list');
+        service_list.innerHTML = ''; // Clear the loading message
+        appointment_list.innerHTML = ''; // Clear the loading message
+        const allServicesKeys = Object.keys(data);
+        let service_html = '';
+        let appointment_html = '';
+        allServicesKeys.forEach(serviceKey => {
+            const a = document.createElement('a');
+            a.href = `#services?scrollTo=${serviceKey}`;
+            a.innerText = data[serviceKey]['service_name'] || serviceKey;
+            service_list.appendChild(a);
+            
+            const a2 = document.createElement('a');
+            a2.href = `#appointment?service=${serviceKey}`;
+            a2.innerText = data[serviceKey].form.title || serviceKey;
+            appointment_list.appendChild(a2);
+        });
+    });
+</script>

@@ -7,6 +7,20 @@ function switchFunction(element) {
     fetchPage(page, contentDiv);
 }
 */
+function loadingAnimation(node) {
+    if (!node) return;
+    let dots = 0;
+    loadingEl = node.querySelector('.Loading-page');
+    if (!loadingEl) return;
+    return setInterval(() => {
+        dots = (dots + 1) % 4;
+        loadingEl.innerHTML = `
+            <h1 style="text-align:center; width: 100%; margin: auto; position: relative;">
+                ${'Loading' + '.'.repeat(dots)}
+            </h1>
+            `;
+    }, 500);
+}
 // load page content function
 function fetchPage(page, contentDiv) {
     // default page: 'home'
@@ -16,10 +30,10 @@ function fetchPage(page, contentDiv) {
     const JsFile = `js/${pageName}.js`;     // js/home.js (relative to base)
     contentDiv.innerHTML = `
         <div class="Loading-page">
-            <h1 class="notice">Loading...</h1>
+            <h1 style="text-align:center; width: 100%; margin: auto; position: relative;">Loading...</h1>
         </div>
     `;
-    const loadingInterval = loadingAnimation(contentDiv.querySelector(".Loading-page h1"));
+    const loadingInterval = loadingAnimation(contentDiv);
     fetch(pageFile)
         .then(response => {
             if (!response.ok) {
@@ -78,7 +92,7 @@ function fetchPage(page, contentDiv) {
         })
         .catch(error => {
             clearInterval(loadingInterval);
-            contentDiv.innerHTML = `<div class="error-page"><p tabindex="-1" class="notice">failed to load page "${pageName}", please try again later.<br>${error}</p></div>`;
+            contentDiv.innerHTML = `<p tabindex="-1">failed to load page "${pageName}", please try again later.</p>`;
             console.error(error);
         });
 }
@@ -86,10 +100,6 @@ function fetchPage(page, contentDiv) {
 // handle page load URL (support direct access to #{pageName})
 document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.querySelector('.main-content');
-    if (window.location.protocol === 'file:') {
-        contentDiv.innerHTML = `<div class="file-protocol-warning-page"><p tabindex="-1" class="notice">This page cannot be accessed directly from a file. Please use a web server.</p></div>`;
-        return
-    }
     const page = window.location.hash.replace('#', '') || 'home';
     fetchPage(page, contentDiv);
 });
@@ -97,10 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // handle browser back/forward buttons
 window.onpopstate = function (event) {
     const contentDiv = document.querySelector('.main-content');
-    if (window.location.protocol === 'file:') {
-        contentDiv.innerHTML = `<div class="file-protocol-warning-page"><p tabindex="-1" class="notice">This page cannot be accessed directly from a file. Please use a web server.</p></div>`;
-        return
-    }
     const page = event.state?.page || window.location.hash.replace('#', '') || 'home';
 
     fetchPage(page, contentDiv);

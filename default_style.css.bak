@@ -325,15 +325,6 @@ footer {
         -moz-user-select: text;
         -ms-user-select: text;
     }
-
-    .notice {
-        text-align:center;
-        width: 100%;
-        margin: auto;
-        position: relative;
-        white-space: pre-line;
-        word-break: break-word;
-    }
 }
 
 /* particles.js background container */

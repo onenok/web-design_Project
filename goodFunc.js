@@ -63,3 +63,12 @@ window.goodAlert = function(text) {
         }
     });
 };
+
+window.loadingAnimation = function(loadingEl) {
+    if (!loadingEl) return;
+    let dots = 0;
+    return setInterval(() => {
+        dots = (dots + 1) % 4;
+        loadingEl.textContent = 'Loading' + '.'.repeat(dots);
+    }, 500);
+}
